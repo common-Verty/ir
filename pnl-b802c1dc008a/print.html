@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Verty 손익구조 및 5개년 전망 (2026–2030)</title>
+<style>
+:root{
+  --ink:#111417; --ink2:#4a4f57; --muted:#7a7f88;
+  --line:#dcdfe4; --surface:#fff; --bg:#fff; --card:#fff;
+  --pos:#111417; --neg:#111417;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'D-DIN','Pretendard','Pretendard Variable',-apple-system,'Segoe UI','Malgun Gothic',sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 24px 64px}
+header.hero{background:#fff;border-bottom:1px solid var(--line)}
+.hero .wrap{padding:60px 24px 34px}
+.kick{display:block;font-size:11.5px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin-bottom:12px}
+.hero h1{font-size:34px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.2}
+.hero .sub{color:var(--ink2);margin-top:12px;font-size:14px}
+.hero .metabar{color:var(--muted);font-size:12px;margin-top:20px;letter-spacing:.02em}
+section{margin-top:56px}
+h2{font-size:19px;font-weight:700;letter-spacing:.1em;margin-bottom:4px;text-transform:uppercase}
+h2 .kick{margin-bottom:6px}
+h3.subhead{font-size:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:40px 0 4px}
+h3.subhead .kick{margin-bottom:6px}
+.h2sub{color:var(--ink2);font-size:13.5px;margin-bottom:18px}
+.toggle{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.toggle .lbl{font-size:11.5px;color:var(--muted);margin-right:2px;letter-spacing:.2em;text-transform:uppercase}
+.toggle button{border:1px solid #000;background:transparent;color:#000;
+  padding:8px 24px;border-radius:32px;font-size:12px;cursor:pointer;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase}
+.toggle button.on{background:#000;border-color:#000;color:#fff}
+.toggle .def{font-size:12px;color:var(--muted);margin-left:6px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;margin-top:20px}
+.kpi{background:transparent;border:0;border-top:1px solid #000;border-radius:0;padding:14px 2px 0}
+.kpi .k{font-size:11.5px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase}
+.kpi .v{font-size:30px;font-weight:700;margin-top:6px;letter-spacing:.01em}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:0;padding:22px}
+.chartbox{overflow-x:auto}
+svg text{font-family:inherit}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 2px 0;font-size:12.5px;color:var(--ink2)}
+.legend .chip{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--ink2);font-weight:600;font-size:12.5px;border-bottom:2px solid var(--line)}
+.tblwrap{overflow-x:auto;margin-top:14px}
+tr.em td{font-weight:700}
+tr.sub td{color:var(--ink2);font-size:12.5px}
+td.neg{color:var(--neg)} td.pos{color:var(--pos)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+.segcard{background:var(--card);border:1px solid var(--line);border-radius:0;padding:20px}
+.segcard h3{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.segcard h3 .dot{width:11px;height:11px;border-radius:3px;flex:none}
+.segcard .desc{font-size:13px;color:var(--ink2);margin-top:6px}
+.segcard .facts{margin-top:10px;font-size:13px}
+.segcard .facts div{display:flex;justify-content:space-between;padding:3.5px 0;border-bottom:1px dashed var(--line)}
+.segcard .facts div span:last-child{font-weight:600;font-variant-numeric:tabular-nums}
+.ubar{margin-top:12px}
+.ubar .row{display:grid;grid-template-columns:minmax(150px,1.5fr) 1fr 58px 60px;gap:8px;align-items:center;
+  font-size:12.5px;padding:2.5px 0}
+.ubar .nm{color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ubar .bar{height:8px;border-radius:4px;background:#111;opacity:.9;min-width:2px}
+.ubar .val{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.ubar .tag{font-size:10.5px;color:var(--muted);text-align:right}
+.ubar .tag.meas{color:#111;font-weight:700}
+.ubar .total{border-top:1px solid var(--line);margin-top:5px;padding-top:6px;font-weight:700;font-size:13px;
+  display:flex;justify-content:space-between}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.bl{list-style:none;margin:0;padding:0}
+.bl li{position:relative;padding-left:14px;margin:4px 0;line-height:1.55}
+.bl li::before{content:"·";position:absolute;left:2px;color:var(--muted);font-weight:700}
+.h2sub .bl li{font-size:13.5px}
+.callout .bl li{font-size:13.5px}
+.foot .bl li{margin:7px 0}
+.callout{border-left:2px solid #000;background:var(--surface);border-radius:0;
+  padding:14px 18px;margin-top:16px;font-size:13.5px;color:var(--ink2)}
+.foot{font-size:12.5px;color:var(--ink2)}
+.foot li{margin:6px 0 6px 18px}
+.tooltip{position:fixed;pointer-events:none;background:#111417;color:#fff;font-size:12px;
+  padding:7px 10px;border-radius:4px;opacity:0;transition:opacity .12s;z-index:50;line-height:1.45}
+@media print{.toggle{display:none}.wrap{padding:10px}body{background:#fff}}
+</style>
+</head>
+<body>
+<div class="tooltip" id="tip"></div>
+<header class="hero"><div class="wrap">
+  <h1><span class="kick">Verty · Investor Brief</span>손익구조 및 5개년 전망 (2026–2030)</h1>
+  <div class="sub">기체 총판·위탁운용·운영시스템을 축으로 한 부문별 매출과 5개년 손익 전망 설명자료</div>
+  <div class="toggle" id="toggle">
+    <span class="lbl">시나리오</span>
+    <button data-s="Bear">Bear</button><button data-s="Base" class="on">Base</button><button data-s="Bull">Bull</button>
+    <span class="def" id="scenDef"></span>
+  </div>
+  <div class="metabar">근거 모델: Verty_매출프로젝션_밸류에이션_v2.16 (2026-08-07) · 작성 2026-08-07 · 전 금액 원화(억원) · USD 근거 단가는 1,500원 환산 고정 · 인쇄용 라이트판</div>
+</div></header>
+<div class="wrap">
+
+<section id="secKpi">
+  <div class="kpis" id="kpis"></div>
+  <div class="kick" style="margin-top:36px">Key Volumes · 선택 시나리오</div>
+  <div class="kpis" id="kpiVol"></div>
+</section>
+
+<section>
+  <h2><span class="kick">Consolidated P&amp;L</span>손익 전망 (5개년)</h2>
+  <div class="h2sub">매출 → 매출원가 → 판관비 → 영업이익 · 전사 기준 (선택 시나리오 · 억원)</div>
+  <div class="card chartbox"><div id="plChart"></div></div>
+  <div class="tblwrap card" style="margin-top:14px" id="plTable"></div>
+  <div class="callout" id="bepNote"></div>
+</section>
+
+<section>
+  <h2><span class="kick">Revenue Forecast</span>부문별 매출 전망 (5개년)</h2>
+  <div class="h2sub">부문별 연도 매출 (선택 시나리오 · 억원) · 정부 R&amp;D 출연금은 비매출·별도 관리로 참고 병기 (매출·이익·기업가치 미포함)</div>
+  <div class="card chartbox"><div id="revChart"></div><div class="legend" id="revLegend"></div></div>
+  <div class="tblwrap card" style="margin-top:14px" id="revTable"></div>
+  <div class="callout" id="mixNote"></div>
+</section>
+
+
+
+</div>
+<script>
+const DATA = {"meta": {"model": "Verty_매출프로젝션_밸류에이션_v2.16 (2026-08-07)", "built": "2026-08-07", "unit": "억원", "years": [2026, 2027, 2028, 2029, 2030]}, "scenarios": {"Bear": {"segments": {"s1": {"rev": [0.0, 0.0, 75.0, 112.5, 150.0, 337.5]}, "s3": {"rev": [6.63, 0.0, 15.0, 16.8, 18.6, 57.03]}, "s5": {"rev": [0.0, 0.0, 7.875, 14.3438, 22.5, 44.7188]}, "s2": {"rev": [0.0, 0.0, 22.5, 67.5, 112.5, 202.5]}, "s4": {"rev": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, "s6": {"rev": [1.96, 10.0, 15.0, 3.75, 3.75, 34.46]}}, "total": {"rev": [8.59, 10.0, 135.375, 214.8938, 307.35, 676.2088], "cogs": [4.7726, 4.9, 103.8705, 151.2533, 204.1485, 468.9449], "gp": [3.8174, 5.1, 31.5045, 63.6405, 103.2015, 207.2639], "gpr": [0.4444, 0.51, 0.2327, 0.2961, 0.3358], "sga": [13.4, 17.0716, 21.7492, 27.7085, 35.3006], "op": [-9.5827, -11.9716, 9.7553, 35.932, 67.9009, 92.0339], "opr": [-1.1156, -1.1972, 0.0721, 0.1672, 0.2209], "dep": [0.2, 0.2, 2.6, 2.6, 2.6], "ebitda": [-9.3827, -11.7716, 12.3553, 38.532, 70.5009, 100.2339], "ebitdam": [-1.0923, -1.1772, 0.0913, 0.1793, 0.2294], "tax": [0.0, 0.0, 2.1462, 7.905, 14.9382], "fcf": [-9.3827, -11.7716, 10.2091, 30.627, 55.5627, 75.2445]}}, "Base": {"segments": {"s1": {"rev": [0.0, 75.0, 150.0, 225.0, 375.0, 825.0]}, "s3": {"rev": [6.63, 27.2075, 42.2075, 51.99, 55.59, 183.625]}, "s5": {"rev": [0.0, 12.5, 29.5312, 50.2031, 67.5, 159.7344]}, "s2": {"rev": [0.0, 0.0, 135.0, 270.0, 405.0, 810.0]}, "s4": {"rev": [0.0, 0.0, 0.0, 0.0, 63.67, 63.67]}, "s6": {"rev": [1.96, 15.0, 21.0, 21.75, 28.75, 88.46]}}, "total": {"rev": [8.59, 129.7075, 377.7387, 618.9431, 995.51, 2130.4894], "cogs": [4.7726, 97.1148, 243.9303, 353.5283, 579.6974, 1279.0434], "gp": [3.8174, 32.5927, 133.8084, 265.4149, 415.8126, 851.446], "gpr": [0.4444, 0.2513, 0.3542, 0.4288, 0.4177], "sga": [13.4, 17.0716, 21.7492, 27.7085, 35.3006], "op": [-9.5827, 15.5211, 112.0592, 237.7064, 380.512, 736.216], "opr": [-1.1156, 0.1197, 0.2967, 0.3841, 0.3822], "dep": [0.2, 0.2, 7.4, 7.4, 7.4], "ebitda": [-9.3827, 15.7211, 119.4592, 245.1064, 387.912, 758.816], "ebitdam": [-1.0923, 0.1212, 0.3162, 0.396, 0.3897], "tax": [0.0, 3.4146, 24.653, 52.2954, 83.7126], "fcf": [-9.3827, 12.3064, 94.8062, 192.811, 304.1994, 594.7403]}}, "Bull": {"segments": {"s1": {"rev": [0.0, 225.0, 262.5, 337.5, 487.5, 1312.5]}, "s3": {"rev": [6.63, 42.605, 102.605, 123.765, 134.565, 410.17]}, "s5": {"rev": [0.0, 17.5, 63.0, 95.625, 135.0, 311.125]}, "s2": {"rev": [0.0, 0.0, 270.0, 585.0, 1080.0, 1935.0]}, "s4": {"rev": [0.0, 0.0, 0.0, 0.0, 89.138, 89.138]}, "s6": {"rev": [1.96, 21.0, 29.4, 30.45, 40.25, 123.06]}}, "total": {"rev": [8.59, 306.105, 727.505, 1172.34, 1966.453, 4180.993], "cogs": [4.7726, 240.9894, 395.5056, 532.4926, 854.19, 2027.9503], "gp": [3.8174, 65.1156, 331.9994, 639.8474, 1112.263, 2153.0427], "gpr": [0.4444, 0.2127, 0.4564, 0.5458, 0.5656], "sga": [13.4, 17.0716, 21.7492, 27.7085, 35.3006], "op": [-9.5827, 48.044, 310.2502, 612.1389, 1076.9624, 2037.8128], "opr": [-1.1156, 0.157, 0.4265, 0.5222, 0.5477], "dep": [0.2, 0.2, 9.8, 9.8, 9.8], "ebitda": [-9.3827, 48.244, 320.0502, 621.9389, 1086.7624, 2067.6128], "ebitdam": [-1.0923, 0.1576, 0.4399, 0.5305, 0.5527], "tax": [0.0, 10.5697, 68.255, 134.6706, 236.9317], "fcf": [-9.3827, 37.6743, 251.7951, 487.2683, 849.8307, 1617.1858]}}}, "unit_econ": {"s1": {"vol": {"Bear": [0.0, 0.0, 2.0, 3.0, 4.0, 9.0], "Base": [0.0, 2.0, 4.0, 6.0, 10.0, 22.0], "Bull": [0.0, 6.0, 7.0, 9.0, 13.0, 35.0]}, "vol_label": "기체 인도 (대)"}, "s2": {"vol": {"Bear": [0.0, 0.0, 1.0, 3.0, 5.0, 9.0], "Base": [0.0, 0.0, 4.0, 8.0, 12.0, 24.0], "Bull": [0.0, 0.0, 6.0, 13.0, 24.0, 43.0]}, "vol_label": "운용 대수 (연평균, 대)"}, "s3": {"vol": {"Bear": [0, 0, 1, 1, 1, 3], "Base": [0, 0, 1, 2, 2, 5], "Bull": [0, 0, 2, 3, 3, 8]}, "vol_label": "버티포트 시스템 사이트 (신규, '28~)"}, "s5": {"vol": {"Bear": [0, 0, 6, 9, 12, 27], "Base": [0, 0, 15, 21, 24, 60], "Bull": [0, 0, 24, 30, 36, 90]}, "vol_label": "UaaS 웻리스 계약 (개월)"}}, "assum": {"sga2026": 13.4, "sga_cagr": 0.274, "dep": 0.2, "capex": 0.0, "tax": 0.22, "fx": 1500.0}, "rnd": {"flow": {"Bear": [0.0, 3.0, 13.0, 13.0, 13.0, 42.0], "Base": [0.0, 4.5, 24.5, 24.5, 24.5, 78.0], "Bull": [0.0, 6.0, 36.0, 36.0, 36.0, 114.0]}}};
+const YEARS = DATA.meta.years;
+const SEGS = [
+ {k:"s1",num:"①",name:"기체 판매",color:"#111111",pts:["AutoFlight 기체 국내 총판","대당 37.5억원($2.5M) 판매","경쟁 기체(조비·아처, $5~6M)의 절반 가격"]},
+ {k:"s3",num:"②",name:"운영시스템 판매",color:"#3d3d3d",pts:["관제·운영 시스템 구축과 용역, 사이트당 15~30억원 + 구축 후 연 12% 유지·운영 반복 매출","시장 = 국토부 버티포트 계획('25년 4개소 → '30년 24개소) · 신규 사이트 점유율 Bear 10% / Base 25% / Bull 40% (Base 누적 5개소)","한국자동차연구원 수행 중 · 인천공항 본사업과 디지털관제(80.2억 공고) 참여 추진 · '28년 시범운용구역 지정 후 구축 본격화"]},
+ {k:"s5",num:"③",name:"UaaS (시연·실증·웻리스)",color:"#6b6b6b",pts:["'28년 지역 시범사업 개화, IR 잠재 고객 풀(20곳)과 사업모델 공동 개발","고객당 3개월 웻리스 · 침투율 '28년 25% → '30년 40% (Base) · 시범 단가에서 상용 단가로 단계 상승","자가 기체 보유, 감가·정비·보험·구입 금융과 전개비·가동률 램프까지 원가 반영 ('28년은 투자기 적자)"]},
+ {k:"s2",num:"④",name:"위탁운용",color:"#949494",pts:["판매한 기체를 고객 대신 운용, 조종·정비·보험 포함","기체당 연 22.5~45억원 반복 매출","손익의 핵심 동력"]},
+ {k:"s4",num:"⑤",name:"화물운송",color:"#bfbfbf",pts:["Carry-All 화물기, 도서·긴급 물류","'30년 = UaaS 시범에서 발굴된 사업모델(화물운송)의 본격 전환 원년"]},
+ {k:"s6",num:"⑥",name:"기타매출",color:"#e0e0e0",pts:["정부·공공 조달과 연구용역: 정책·기술 연구, 정보시스템 구축","TS 도심항공교통정보시스템 '27년 10억 · '28년 15억 (2개년 조달 예정) · 구축 후 운영·유지관리('29~ 연 3.75억)와 후속 공공 정보시스템 조달('29~ 연 1건 수준)로 연결","연구·정책용역은 레퍼런스 축적에 비례해 확대 ('27년 5억 → '30년 10억) · 2026년 확정 3건 1.96억 (민간 1.5 · 경기도 0.26 · TS 0.2)"]}
+];
+const SCEN_DEF = {Bear:"가시화된 매출만", Base:"가시화 + 예상 매출의 보수적 반영", Bull:"낙관(물량·단가 상단)"};
+let scen = "Base";
+
+const labColor = h => {const n=parseInt(h.slice(1),16);
+  const L=0.299*(n>>16&255)+0.587*(n>>8&255)+0.114*(n&255); return L>145?"#111":"#fff"};
+const fm = v => v==null ? "—" : Math.abs(v)>=100 ? Math.round(v).toLocaleString("ko-KR")
+          : Math.abs(v)>=10 ? v.toFixed(1) : v.toFixed(2).replace(/\.?0+$/,"") || "0";
+const fmB = v => v==null ? "—" : (Math.abs(v)>=100 ? Math.round(v).toLocaleString("ko-KR") : (+v.toFixed(1)).toLocaleString("ko-KR"));
+const fp = v => v==null ? "—" : (v*100).toFixed(1)+"%";
+const cls = v => v<0 ? ' class="neg"' : '';
+
+function S(){ return DATA.scenarios[scen]; }
+function bepYear(){ const op=S().total.op; for(let i=0;i<5;i++) if(op[i]>0) return YEARS[i]; return null; }
+
+function renderKpis(){
+  const t=S().total;
+  const items=[
+    {k:"5개년 누적 매출", v:fmB(t.rev[5])+"억", s:"2026–2030 합계"},
+    {k:"2030년 매출", v:fmB(t.rev[4])+"억", s:"매출총이익률 "+fp(t.gpr[4])},
+    {k:"2030년 EBITDA", v:fmB(t.ebitda[4])+"억", s:"EBITDA 마진 "+fp(t.ebitdam[4])},
+    {k:"영업이익 흑자 전환", v:bepYear()? bepYear()+"년":"—", s:"판관비 포함 전사 기준"}
+  ];
+  document.getElementById("kpis").innerHTML = items.map(i=>
+    `<div class="kpi"><div class="k">${i.k}</div><div class="v">${i.v}</div><div class="s">${i.s}</div></div>`).join("");
+}
+
+function renderKpiVol(){
+  const u=DATA.unit_econ;
+  const items=[
+    {k:"기체 인도", v:fmB(u.s1.vol[scen][5])+"대", s:"5개년 누계"},
+    {k:"운영시스템 판매", v:fmB(u.s3.vol[scen][5])+"개 사이트", s:"버티포트 사이트당 1식 · '28년 지정 후 (5개년 누계)"},
+    {k:"UaaS 웻리스 계약", v:fmB(u.s5.vol[scen][5])+"개월", s:"고객당 3개월 계약 · '28년 개화 (5개년 누계)"},
+    {k:"위탁운용", v:fmB(u.s2.vol[scen][4])+"대", s:"2030년 연평균 운용 대수"}
+  ];
+  document.getElementById("kpiVol").innerHTML = items.map(i=>
+    `<div class="kpi"><div class="k">${i.k}</div><div class="v">${i.v}</div><div class="s">${i.s}</div></div>`).join("");
+}
+
+function renderSegCards(){
+  document.getElementById("segcards").innerHTML = SEGS.map(sg=>{
+    const d=S().segments[sg.k]; const u=DATA.unit_econ[sg.k]||{};
+    const cumRev=d.rev[5];
+    const share = S().total.rev[5]>0 ? cumRev/S().total.rev[5] : null;
+    let volLine="";
+    if(u.vol){ const v=u.vol[scen]; volLine=`<div><span>${u.vol_label} 누계</span><span>${fmB(v[5])}</span></div>`; }
+    return `<div class="segcard"><h3><span class="dot" style="background:${sg.color}"></span>${sg.num} ${sg.name}</h3>
+      <div class="desc"><ul class="bl">${sg.pts.map(p=>`<li>${p}</li>`).join("")}</ul></div>
+      <div class="facts">${volLine}
+        <div><span>5개년 매출 (선택 시나리오)</span><span>${fmB(cumRev)}억</span></div>
+        <div><span>5개년 매출 비중</span><span>${share==null?"—":fp(share)}</span></div>
+      </div></div>`;
+  }).join("");
+}
+
+// ── 매출 스택 차트 (SVG) — 정부 R&D 유입은 빗금 블록으로 별도 병기 (매출 합계에 미포함) ──
+function renderRevChart(){
+  const t=S(); const rnd=DATA.rnd.flow[scen]; const W=980,H=360,PL=64,PR=16,PT=28,PB=34;
+  const iw=W-PL-PR, ih=H-PT-PB;
+  const totals=YEARS.map((_,i)=>t.total.rev[i]+(rnd[i]||0));
+  const maxV=Math.max(...totals)*1.12;
+  const bw=Math.min(72,iw/5*0.52), step=iw/5;
+  const y=v=>PT+ih-(v/maxV)*ih;
+  let g=`<defs><pattern id="rndp" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#8a8a8a" stroke-width="1.6"/></pattern></defs>`;
+  const ticks=4;
+  for(let i=0;i<=ticks;i++){ const tv=maxV/ticks*i, ty=y(tv);
+    g+=`<line x1="${PL}" x2="${W-PR}" y1="${ty}" y2="${ty}" stroke="#e8e8e8" stroke-width="1"/>`;
+    g+=`<text x="${PL-8}" y="${ty+4}" text-anchor="end" font-size="11" fill="#828282">${fmB(tv)}</text>`; }
+  YEARS.forEach((yr,i)=>{
+    const cx=PL+step*i+step/2; let acc=0;
+    SEGS.forEach(sg=>{ const v=t.segments[sg.k].rev[i]; if(v>0.001){
+      const y0=y(acc), y1=y(acc+v);
+      g+=`<rect x="${cx-bw/2}" y="${y1}" width="${bw}" height="${Math.max(y0-y1-1.5,1)}" rx="2.5"
+        fill="${sg.color}" stroke="#fff" stroke-width="1" class="seg" data-t="${yr}년 · ${sg.num} ${sg.name}|${fmB(v)}억원"/>`;
+      if(y0-y1>=17) g+=`<text x="${cx}" y="${(y0+y1)/2+3.5}" text-anchor="middle" font-size="10.5"
+        font-weight="600" fill="${labColor(sg.color)}" pointer-events="none">${fmB(v)}</text>`;
+      acc+=v; }});
+    let top=acc;
+    if(rnd[i]>0.001){ const y0=y(acc), y1=y(acc+rnd[i]);
+      g+=`<rect x="${cx-bw/2}" y="${y1}" width="${bw}" height="${Math.max(y0-y1-1.5,1)}" rx="2.5"
+        fill="url(#rndp)" stroke="#8a8a8a" stroke-width="1" stroke-dasharray="3 2" class="seg" data-t="${yr}년 · 정부 R&D 출연금 (비매출·별도)|${fmB(rnd[i])}억원"/>`;
+      top=acc+rnd[i]; }
+    g+=`<text x="${cx}" y="${y(top)-7}" text-anchor="middle" font-size="12" font-weight="700" fill="#111">${fmB(acc)}${rnd[i]>0.001?`<tspan font-size="9.5" font-weight="600" fill="#8a8a8a"> +R&D ${fmB(rnd[i])}</tspan>`:""}</text>`;
+    g+=`<text x="${cx}" y="${H-12}" text-anchor="middle" font-size="12" fill="#5a5f66">${yr}</text>`;
+  });
+  document.getElementById("revChart").innerHTML=
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:640px" role="img" aria-label="부문별 연도 매출 누적 막대 차트 (정부 R&D 별도 병기)">${g}</svg>`;
+  document.getElementById("revLegend").innerHTML=SEGS.map(sg=>
+    `<span><span class="chip" style="background:${sg.color}"></span>${sg.num} ${sg.name}</span>`).join("")
+    +`<span><span class="chip" style="background:transparent;border:1px dashed #8a8a8a"></span>정부 R&D 출연금 (비매출·별도)</span>`;
+}
+
+function renderRevTable(){
+  const t=S(); const rnd=DATA.rnd.flow[scen];
+  let h=`<table><thead><tr><th>구분</th>${YEARS.map(y=>`<th>${y}</th>`).join("")}<th>5개년 누계</th></tr></thead><tbody>`;
+  SEGS.forEach(sg=>{ const d=t.segments[sg.k];
+    h+=`<tr><td><span class="chip" style="background:${sg.color};display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px"></span>${sg.num} ${sg.name}</td>${d.rev.slice(0,5).map(v=>`<td>${fmB(v)}</td>`).join("")}<td>${fmB(d.rev[5])}</td></tr>`; });
+  const T=t.total;
+  h+=`<tr class="em"><td>전사 총매출</td>${T.rev.slice(0,5).map(v=>`<td>${fmB(v)}</td>`).join("")}<td>${fmB(T.rev[5])}</td></tr>`;
+  h+=`<tr class="sub"><td>(별도) 정부 R&D 출연금 (비매출·계획)</td>${rnd.slice(0,5).map(v=>`<td>${v>0.001?fmB(v):"—"}</td>`).join("")}<td>${fmB(rnd[5])}</td></tr>`;
+  h+=`<tr><td colspan="7" style="padding-top:12px;border-bottom:0;color:var(--muted);font-size:11px;letter-spacing:.18em;text-transform:uppercase">Volume · 연도별 물량</td></tr>`;
+  [["s1","① 기체 인도 (대)"],["s3","② 버티포트 시스템 사이트 (신규)"],["s5","③ UaaS 웻리스 계약 (개월)"],["s2","④ 위탁운용 (연평균 대)"]].forEach(([k,nm])=>{
+    const v=DATA.unit_econ[k].vol[scen];
+    h+=`<tr class="sub"><td>${nm}</td>${v.slice(0,5).map(x=>`<td>${x?fmB(x):"—"}</td>`).join("")}<td>${v[5]?fmB(v[5]):"—"}</td></tr>`;
+  });
+  h+=`</tbody></table>`;
+  document.getElementById("revTable").innerHTML=h;
+}
+
+function renderMixNote(){
+  const t=S().total; const s2=S().segments.s2;
+  const share = s2.rev[5]/t.rev[5];
+  const rec = t.rev[4]>0 ? (S().segments.s2.rev[4]+S().segments.s3.rev[4])/t.rev[4] : 0;
+  document.getElementById("mixNote").innerHTML =
+    `<b>매출 믹스가 이익률을 끌어올리는 구조</b><ul class="bl" style="margin-top:6px">
+     <li>2027년: 기체 판매와 시스템 구축 중심 (전사 매출총이익률 ${fp(t.gpr[1])})</li>
+     <li>2028년부터: 위탁운용과 유지·운영 반복 매출 누적 (2030년 매출총이익률 ${fp(t.gpr[4])})</li>
+     <li>2030년: 반복 매출 부문(위탁운용+운영시스템) 비중 ${fp(rec)} · 위탁운용 = 5개년 누적 매출의 ${fp(share)}</li></ul>`;
+}
+
+// ── 전사 손익 차트: 매출총이익·영업이익 연도별 (그룹 막대 대신 GP 라인 + OP 막대는 이축 금지 → 동일 축 막대 2계열) ──
+function renderPlChart(){
+  const t=S().total; const W=980,H=330,PL=64,PR=16,PT=26,PB=34;
+  const iw=W-PL-PR, ih=H-PT-PB;
+  const series=[{name:"매출액",vals:t.rev.slice(0,5),color:"#111111"},{name:"영업이익",vals:t.op.slice(0,5),color:"#8a8a8a"}];
+  const allV=series.flatMap(s=>s.vals);
+  const maxV=Math.max(...allV,0)*1.15, minV=Math.min(...allV,0)*1.3;
+  const y=v=>PT+ (maxV-v)/(maxV-minV)*ih;
+  const step=iw/5, bw=Math.min(30,step*0.2);
+  let g="";
+  for(let i=0;i<=4;i++){ const tv=minV+(maxV-minV)/4*i, ty=y(tv);
+    g+=`<line x1="${PL}" x2="${W-PR}" y1="${ty}" y2="${ty}" stroke="#e8e8e8"/>`;
+    g+=`<text x="${PL-8}" y="${ty+4}" text-anchor="end" font-size="11" fill="#828282">${fmB(tv)}</text>`; }
+  g+=`<line x1="${PL}" x2="${W-PR}" y1="${y(0)}" y2="${y(0)}" stroke="#666666" stroke-width="1.2"/>`;
+  YEARS.forEach((yr,i)=>{
+    const cx=PL+step*i+step/2;
+    series.forEach((s,si)=>{ const v=s.vals[i];
+      const y0=y(Math.max(v,0)), y1=y(Math.min(v,0));
+      const bx=cx+(si===0?-bw-2:2), lx=bx+bw/2;
+      g+=`<rect x="${bx}" y="${y0}" width="${bw}" height="${Math.max(y1-y0,1.5)}" rx="2.5" fill="${s.color}" class="seg" data-t="${yr}년 · ${s.name}|${fmB(v)}억원"/>`;
+      g+=`<text x="${lx}" y="${v>=0? y0-5 : y1+13}" text-anchor="middle" font-size="10.5"
+        font-weight="600" fill="#111" pointer-events="none">${fmB(v)}</text>`;
+    });
+    g+=`<text x="${cx}" y="${H-12}" text-anchor="middle" font-size="12" fill="#5a5f66">${yr}</text>`;
+  });
+  document.getElementById("plChart").innerHTML=
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" style="min-width:640px" role="img" aria-label="연도별 매출총이익과 영업이익 막대 차트">${g}</svg>
+     <div class="legend"><span><span class="chip" style="background:#111111"></span>매출액</span><span><span class="chip" style="background:#6e6e6e"></span>영업이익</span></div>`;
+}
+
+function renderPlTable(){
+  const T=S().total;
+  const rows=[
+    ["매출액", T.rev, "em", fmB], ["매출원가", T.cogs, "", fmB], ["매출총이익", T.gp, "em", fmB],
+    ["매출총이익률", T.gpr, "sub", fp], ["판관비", T.sga, "", fmB], ["영업이익", T.op, "em", fmB],
+    ["영업이익률", T.opr, "sub", fp], ["감가상각", T.dep, "", fm], ["EBITDA", T.ebitda, "em", fmB],
+    ["EBITDA 마진", T.ebitdam, "sub", fp], ["법인세 (22%)", T.tax, "", fmB], ["FCF", T.fcf, "", fmB],
+  ];
+  let h=`<table><thead><tr><th>구분 (억원)</th>${YEARS.map(y=>`<th>${y}</th>`).join("")}<th>5개년 누계</th></tr></thead><tbody>`;
+  rows.forEach(([nm,vals,c,f])=>{
+    h+=`<tr class="${c}"><td>${nm}</td>${YEARS.map((_,i)=>{const v=vals[i];return `<td${v<0?' class="neg"':''}>${f(v)}</td>`;}).join("")}<td>${vals[5]!=null?f(vals[5]):"—"}</td></tr>`;
+  });
+  h+=`</tbody></table>`;
+  document.getElementById("plTable").innerHTML=h;
+}
+
+function renderBep(){
+  const t=S().total; const by=bepYear();
+  document.getElementById("bepNote").innerHTML =
+    `<b>손익 흐름 요약</b><ul class="bl" style="margin-top:6px">
+     <li>2026년: 영업적자 ${fmB(t.op[0])}억 (판관비 13.4억 대비 매출 규모 미달)</li>
+     <li>${by? by+"년: 영업이익 흑자 전환 (+"+fmB(t.op[YEARS.indexOf(by)])+"억)" : "5개년 내 영업이익 흑자 전환 없음"}</li>
+     <li>2030년: 영업이익률 ${fp(t.opr[4])} (매출총이익 증가 &gt; 판관비 증가 연 27.4%)</li></ul>`;
+}
+
+function renderRnd(){
+  const R=DATA.rnd; if(!R||!R.projects.length) return;
+  document.getElementById("rndCards").innerHTML = R.projects.map(p=>{
+    let amtRow="";
+    if(p.amt_scen) amtRow=`<div><span>버티 몫 (선택 시나리오)</span><span>${fmB(p.amt_scen[scen])}억</span></div>`;
+    else if(p.amt_txt) amtRow=`<div><span>버티 몫</span><span>${p.amt_txt}</span></div>`;
+    const range = p.amt_scen? `<div class="note">Bear ${fmB(p.amt_scen.Bear)} · Base ${fmB(p.amt_scen.Base)} · Bull ${fmB(p.amt_scen.Bull)}억</div>`:"";
+    return `<div class="segcard"><h3>${p.title}</h3>
+      <div class="desc"><ul class="bl">${p.pts.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div class="facts">
+        <div><span>기간</span><span>${p.period||"—"}</span></div>${amtRow}
+        <div><span>상태</span><span>${p.status}</span></div>
+      </div>${range}</div>`;
+  }).join("");
+  const carriers=R.projects.filter(p=>p.amt_scen&&p.years);
+  let h="";
+  if(carriers.length){
+    const iv=[0,0,0,0,0];
+    carriers.forEach(p=>{const n=p.years.reduce((a,b)=>a+b,0);
+      p.years.forEach((f,idx)=>{if(f) iv[idx]+=p.amt_scen[scen]/n;});});
+    const cum=iv.reduce((a,b)=>a+b,0);
+    h=`<table><thead><tr><th>정부출연금 유입 계획 (선택 시나리오 · 억원)</th>${YEARS.map(y=>`<th>${y}</th>`).join("")}<th>누계</th></tr></thead>
+       <tbody><tr><td>과제 합계 (미협약 계획 포함)</td>${iv.map(v=>`<td>${v?fmB(v):"—"}</td>`).join("")}<td>${fmB(cum)}</td></tr></tbody></table>
+       <ul class="bl" style="margin-top:10px"><li>연차 배분: 과제 기간 내 균등 가정 (1-1: '27~'30 · 3-3: '28~'30)</li>
+       <li>협약 확정 전 계획 수치로 매출·이익·기업가치에 미포함</li></ul>`;
+  }
+  document.getElementById("rndFlow").innerHTML=h;
+}
+function renderAll(){
+  document.getElementById("scenDef").textContent = scen+" = "+SCEN_DEF[scen];
+  renderKpis(); renderKpiVol();
+  if(document.getElementById("segcards")) renderSegCards();
+  renderRevChart(); renderRevTable(); renderMixNote();
+  renderPlChart(); renderPlTable(); renderBep();
+  if(document.getElementById("rndCards")) renderRnd();
+  bindTips();
+}
+document.getElementById("toggle").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  scen=b.dataset.s;
+  document.querySelectorAll("#toggle button").forEach(x=>x.classList.toggle("on",x===b));
+  renderAll();
+});
+const tip=document.getElementById("tip");
+function bindTips(){
+  document.querySelectorAll(".seg").forEach(el=>{
+    el.addEventListener("mousemove",ev=>{
+      const [a,b]=el.dataset.t.split("|");
+      tip.innerHTML=`<div>${a}</div><div style="font-weight:700">${b}</div>`;
+      tip.style.left=(ev.clientX+14)+"px"; tip.style.top=(ev.clientY-10)+"px"; tip.style.opacity=1;
+    });
+    el.addEventListener("mouseleave",()=>tip.style.opacity=0);
+  });
+}
+renderAll();
+</script>
+</body>
+</html>
