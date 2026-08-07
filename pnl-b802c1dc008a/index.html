@@ -191,7 +191,7 @@ function renderSegCards(){
   }).join("");
 }
 
-// ── 매출 스택 차트 (SVG) — 정부 R&D 유입은 빗금 블록으로 별도 병기 (매출 합계에 미포함) ──
+// ── 매출 스택 차트 (SVG) · 정부 R&D 유입은 빗금 블록으로 별도 병기 (매출 합계 미포함) ──
 function renderRevChart(){
   const t=S(); const rnd=DATA.rnd.flow[scen]; const W=980,H=360,PL=64,PR=16,PT=28,PB=34;
   const iw=W-PL-PR, ih=H-PT-PB;
