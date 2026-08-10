@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>업무지시서 · 노션 업무요청 기능과 전체 순환 모델 v1.1</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body { font-family:'Pretendard','Malgun Gothic','Segoe UI',sans-serif; background:#f4f6f9; color:#1a2332; line-height:1.65; }
+  .wrap { max-width:1000px; margin:0 auto; padding:32px 20px 60px; }
+  header.hero { background:#0b1220; color:#fff; border-radius:14px; padding:32px 36px; margin-bottom:22px; }
+  header.hero h1 { font-size:25px; font-weight:800; letter-spacing:-0.5px; }
+  header.hero p.sub { color:#9fb3d1; margin-top:8px; font-size:14.5px; }
+  .badges { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; }
+  .badge { background:#12213d; border:1px solid #24406e; color:#cfe3ff; font-size:12.5px; padding:6px 12px; border-radius:999px; }
+  .badge.hot { background:#0078BE; border-color:#0078BE; color:#fff; font-weight:700; }
+  h2 { font-size:19px; font-weight:800; margin:32px 0 14px; padding-left:12px; border-left:5px solid #0078BE; letter-spacing:-0.3px; page-break-after:avoid; break-after:avoid-page; }
+  .card { background:#fff; border:1px solid #e3e9f2; border-radius:12px; padding:22px 24px; margin-bottom:14px; box-shadow:0 1px 3px rgba(16,42,80,.05); page-break-inside:avoid; }
+  .card p { font-size:14px; margin-bottom:10px; }
+  .card p:last-child { margin-bottom:0; }
+  .frame { background:#eef2f8; border-radius:10px; padding:14px; margin:4px 0 10px; }
+  .frame svg { width:100%; height:auto; display:block; }
+  .cap { font-size:12.5px; color:#5a6b85; margin-top:8px; }
+  table.mini { width:100%; border-collapse:collapse; font-size:13.3px; margin-top:6px; }
+  table.mini th, table.mini td { border:1px solid #e0e6ef; padding:7px 10px; text-align:left; vertical-align:top; }
+  table.mini th { background:#f2f6fb; font-size:12.5px; white-space:nowrap; }
+  .ask { border-left:4px solid #0078BE; background:#f7fafd; border-radius:0 10px 10px 0; padding:14px 18px; margin:10px 0; page-break-inside:avoid; }
+  .ask b.no { display:inline-block; background:#0078BE; color:#fff; font-size:12px; font-weight:700; border-radius:5px; padding:1px 8px; margin-right:8px; vertical-align:1px; }
+  .ask p { font-size:13.8px; margin-top:6px; }
+  .checklist { background:#f0f7f0; border:1px solid #bfdcbf; border-radius:12px; padding:18px 22px; page-break-inside:avoid; }
+  .checklist h3 { font-size:15px; margin-bottom:8px; color:#1e6b2e; }
+  .checklist li { font-size:13.8px; margin:5px 0 5px 18px; }
+  .reflist { background:#fff; border:1px solid #e3e9f2; border-radius:12px; padding:18px 22px; margin-bottom:14px; page-break-inside:avoid; }
+  .reflist h3 { font-size:15px; margin-bottom:8px; color:#0f2f52; }
+  .reflist li { font-size:13.8px; margin:5px 0 5px 18px; }
+  .prompt { background:#0b1220; color:#d7e6ff; font-family:Consolas,'Courier New',monospace; font-size:12.3px; line-height:1.55; border-radius:9px; padding:12px 14px; margin-top:10px; white-space:pre-wrap; word-break:break-word; }
+  a { color:#0069a8; word-break:break-all; }
+  footer { margin-top:34px; font-size:12.3px; color:#7b8aa3; }
+  details.aictx summary { font-size:13px; color:#5a6b85; cursor:pointer; margin-top:26px; }
+  @page { size:A4 portrait; margin:10mm; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>노션 업무요청 기능, 전체 순환 모델에 맞춰 구현</h1>
+  <p class="sub">요청 발신부터 결과 회신, 드라이브 저장, 위키 환류까지 한 바퀴로 도는 업무 구조를 공유하고, 노션 쪽에서 확인하고 구현해 주실 항목을 정리한 업무지시서입니다.</p>
+  <div class="badges">
+    <span class="badge hot">담당: 구창규 선임</span>
+    <span class="badge">요청자: 김동우</span>
+    <span class="badge">요청일: 2026-08-10(월)</span>
+    <span class="badge">1차 회신 8/12(수) 15시 · 왕복 시연 8/14(금) 15시</span>
+    <span class="badge">업무지시서 v1.1</span>
+  </div>
+</header>
+
+<h2>1. 배경과 목적</h2>
+<div class="card">
+  <p>구창규 선임이 노션으로 업무를 요청하고 관리하는 기능을 만들고 있습니다. 그 기능이 잘 맞물리도록, 회사 업무가 도는 전체 그림을 이 문서로 확정해 공유합니다. 핵심은 노션 기능을 따로 설계하는 것이 아니라, 이미 돌고 있는 요청 포맷과 드라이브, 위키 파이프라인 사이의 가운데 축으로 앉히는 것입니다.</p>
+  <p>업무는 메시지 카드와 HTML 지시서로 요청되고, 결과는 HTML 보고와 산출물 파일로 노션에서 오가며, 그 파일이 구글드라이브에 저장되어 회사 위키로 자동 환류됩니다. 위키에 쌓인 자료는 다음 요청의 근거가 되므로 일이 돌수록 회사 지식이 쌓이는 구조입니다.</p>
+  <p>지금 보고 계신 이 문서 자체가 아래 모델 1단계의 실물 예시입니다. 카톡 카드 한 건과 지시서 한 건이 한 세트로 나가고, 같은 구조가 노션 카드에 그대로 얹히면 됩니다.</p>
+</div>
+
+<h2>2. 전체 순환 모델</h2>
+<div class="card">
+<div class="frame">
+<svg viewBox="0 0 960 302" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="업무요청 순환 모델 다이어그램">
+  <rect width="960" height="302" fill="#f8fafc" rx="8"/>
+  <!-- 단계 박스 5개 -->
+  <g font-family="sans-serif">
+    <!-- 1 카톡 -->
+    <g transform="translate(14,44)">
+      <rect width="172" height="120" rx="10" fill="#ffffff" stroke="#c9d5e6"/>
+      <rect width="172" height="6" rx="3" fill="#f2c94c"/>
+      <circle cx="20" cy="28" r="11" fill="#0b1220"/><text x="20" y="32.5" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">1</text>
+      <text x="38" y="33" font-size="13.5" font-weight="bold" fill="#0f2f52">요청 발신</text>
+      <text x="14" y="58" font-size="11" fill="#44536b">카톡 카드 [업무요청]</text>
+      <text x="14" y="76" font-size="11" fill="#44536b">할 일 · 담당 · 기한</text>
+      <text x="14" y="94" font-size="11" fill="#0069a8">+ HTML 지시서(PDF 링크)</text>
+      <text x="0" y="140" font-size="10.5" fill="#8593a8">카톡 = 알림·대화</text>
+    </g>
+    <!-- 2 노션 등록 -->
+    <g transform="translate(206,44)">
+      <rect width="172" height="120" rx="10" fill="#ffffff" stroke="#c9d5e6"/>
+      <rect width="172" height="6" rx="3" fill="#1a2332"/>
+      <circle cx="20" cy="28" r="11" fill="#0b1220"/><text x="20" y="32.5" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">2</text>
+      <text x="38" y="33" font-size="13.5" font-weight="bold" fill="#0f2f52">노션 보드 등록</text>
+      <text x="14" y="58" font-size="11" fill="#44536b">카드 필드 → 속성 1:1</text>
+      <text x="14" y="76" font-size="11" fill="#44536b">지시서 링크 → '링크' 속성</text>
+      <text x="14" y="94" font-size="11" fill="#44536b">AI 컨텍스트 → 본문 브리프</text>
+      <text x="0" y="140" font-size="10.5" fill="#8593a8">노션 = 대장·현황판</text>
+    </g>
+    <!-- 3 수행·회신 -->
+    <g transform="translate(398,44)">
+      <rect width="172" height="120" rx="10" fill="#ffffff" stroke="#0078BE" stroke-width="1.6"/>
+      <rect width="172" height="6" rx="3" fill="#0078BE"/>
+      <circle cx="20" cy="28" r="11" fill="#0078BE"/><text x="20" y="32.5" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">3</text>
+      <text x="38" y="33" font-size="13.5" font-weight="bold" fill="#0f2f52">수행 · 결과 회신</text>
+      <text x="14" y="58" font-size="11" fill="#44536b">결과 보고 HTML(+PDF)</text>
+      <text x="14" y="76" font-size="11" fill="#44536b">+ 산출물 파일</text>
+      <text x="14" y="94" font-size="11" fill="#44536b">카드 상태 갱신 · 완료 답장</text>
+      <text x="0" y="140" font-size="10.5" fill="#8593a8">담당자 (노션+카톡)</text>
+    </g>
+    <!-- 4 드라이브 -->
+    <g transform="translate(590,44)">
+      <rect width="172" height="120" rx="10" fill="#ffffff" stroke="#c9d5e6"/>
+      <rect width="172" height="6" rx="3" fill="#0069a8"/>
+      <circle cx="20" cy="28" r="11" fill="#0b1220"/><text x="20" y="32.5" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">4</text>
+      <text x="38" y="33" font-size="13.5" font-weight="bold" fill="#0f2f52">드라이브 저장</text>
+      <text x="14" y="58" font-size="11" fill="#44536b">회사 아카이브 폴더에 정본</text>
+      <text x="14" y="76" font-size="11" fill="#44536b">지시서 · 보고서 · 산출물</text>
+      <text x="14" y="94" font-size="11" fill="#44536b">노션 카드엔 링크만</text>
+      <text x="0" y="140" font-size="10.5" fill="#8593a8">드라이브 = 파일 정본</text>
+    </g>
+    <!-- 5 위키 -->
+    <g transform="translate(782,44)">
+      <rect width="172" height="120" rx="10" fill="#ffffff" stroke="#c9d5e6"/>
+      <rect width="172" height="6" rx="3" fill="#2f9e44"/>
+      <circle cx="20" cy="28" r="11" fill="#0b1220"/><text x="20" y="32.5" font-size="12" fill="#fff" text-anchor="middle" font-weight="bold">5</text>
+      <text x="38" y="33" font-size="13.5" font-weight="bold" fill="#0f2f52">위키 환류</text>
+      <text x="14" y="58" font-size="11" fill="#44536b">매일 08:00 자동 편입</text>
+      <text x="14" y="76" font-size="11" fill="#44536b">색인 · 요약 · 전문검색</text>
+      <text x="14" y="94" font-size="11" fill="#44536b">구현 불필요(기존 파이프라인)</text>
+      <text x="0" y="140" font-size="10.5" fill="#8593a8">팀 위키 = 재사용</text>
+    </g>
+    <!-- 단계 사이 화살표 -->
+    <g stroke="#8aa4c4" stroke-width="2" fill="#8aa4c4">
+      <line x1="186" y1="104" x2="199" y2="104"/><path d="M199 99 L207 104 L199 109 Z"/>
+      <line x1="378" y1="104" x2="391" y2="104"/><path d="M391 99 L399 104 L391 109 Z"/>
+      <line x1="570" y1="104" x2="583" y2="104"/><path d="M583 99 L591 104 L583 109 Z"/>
+      <line x1="762" y1="104" x2="775" y2="104"/><path d="M775 99 L783 104 L775 109 Z"/>
+    </g>
+    <!-- 순환 화살표 (5 → 1) -->
+    <g stroke="#2f9e44" stroke-width="2" fill="none">
+      <path d="M868 168 L868 252 L100 252 L100 176" stroke-dasharray="7 5"/>
+    </g>
+    <path d="M95 178 L100 168 L105 178 Z" fill="#2f9e44"/>
+    <text x="484" y="243" font-size="12.5" fill="#1e6b2e" text-anchor="middle" font-weight="bold">위키에 쌓인 자료가 다음 요청의 참고 자료가 된다 (순환)</text>
+    <text x="484" y="286" font-size="11" fill="#8593a8" text-anchor="middle">파일 정본은 드라이브 하나, 노션과 카톡에는 링크와 상태만 흐른다</text>
+  </g>
+</svg>
+</div>
+<table class="mini">
+  <tr><th>단계</th><th>오가는 것</th><th>비고</th></tr>
+  <tr><td>1. 요청 발신</td><td>카톡 카드([업무요청], 할 일·담당·기한 필수) + 상세 건은 HTML 지시서. 지시서 열람은 PDF 링크가 표준</td><td>포맷 v1.2 확정, 변경 없음</td></tr>
+  <tr><td>2. 노션 보드 등록</td><td>카드 필드가 보드 속성에 1:1로 실리고, 지시서 PDF 링크는 '링크' 속성, AI 컨텍스트는 본문 브리프로</td><td>이번 구현 대상</td></tr>
+  <tr><td>3. 수행 · 결과 회신</td><td>담당자가 결과 보고를 HTML(+PDF)로 만들고 산출물 파일과 함께 회신. 카드 상태 갱신, 카톡 원 메시지에 완료 답장</td><td>이번 구현 대상(동선)</td></tr>
+  <tr><td>4. 드라이브 저장</td><td>보고서와 산출물 파일은 드라이브 회사 아카이브 폴더에 저장하고, 노션 카드에는 그 링크만 남긴다</td><td>1순위 후보는 팀_드롭박스(요청 4)</td></tr>
+  <tr><td>5. 위키 환류</td><td>드라이브에 들어온 자료를 매일 아침 파이프라인이 색인·요약·전문검색으로 자동 편입(공유 가능 자료만, 민감 자료 제외)</td><td>구현 불필요, 이미 가동 중</td></tr>
+</table>
+</div>
+
+<h2>3. 역할 분담 원칙</h2>
+<div class="card">
+<table class="mini">
+  <tr><th>축</th><th>역할</th><th>원칙</th></tr>
+  <tr><td>카톡</td><td>알림과 대화</td><td>요청, 접수, 완료가 원 메시지의 답장 스레드로 남는다</td></tr>
+  <tr><td>노션</td><td>대장과 현황판</td><td>조율하고 표시한다. 파일 원본을 쌓지 않고 링크를 건다. 제목에 [업무요청] 접두는 붙이지 않는다</td></tr>
+  <tr><td>드라이브</td><td>파일 정본</td><td>지시서, 보고서, 산출물 모두 드라이브에 저장된 것이 원본이다</td></tr>
+  <tr><td>팀 위키</td><td>재사용</td><td>드라이브에 쌓인 자료가 검색 가능한 회사 지식이 되어 다음 업무의 근거로 쓰인다</td></tr>
+</table>
+</div>
+
+<h2>4. 확인·구현 요청 (5건)</h2>
+<div class="card">
+  <p>구현 방식은 자율입니다. 아래는 순환이 끊기지 않기 위한 접점 조건이고, 이 조건만 맞으면 내부 구조는 편하신 대로 하시면 됩니다.</p>
+  <div class="ask"><b class="no">요청 1</b><b>보드 속성 정합 확인.</b>
+    <p>보드 속성은 회사 표준 필드맵(field_map.json, 2026-07-02 재설계)과 1:1이 원칙입니다. 전체 속성명과 선택값은 6절 표에 그대로 옮겨 두었습니다. 이미 만드신 속성명이 다르면 어느 항목이 다른지만 회신해 주세요. 카톡 포맷과 지시서 구조는 그대로 두고 매핑표 쪽만 맞추면 됩니다.</p></div>
+  <div class="ask"><b class="no">요청 2</b><b>카드 등록 동선.</b>
+    <p>요청 한 건이 들어오면 제목, 담당, 기한, 내용·결과물이 속성으로 실리고, 지시서 PDF 링크가 '링크' 속성에, AI 컨텍스트가 카드 본문 브리프에 들어가는 형태를 확인해 주세요.</p></div>
+  <div class="ask"><b class="no">요청 3</b><b>완료 회신 동선.</b>
+    <p>담당자가 일을 끝내면 카드에 결과 보고(HTML·PDF)와 산출물 파일의 드라이브 링크가 남고, 상태 흐름(배정됨, 진행중, 완료와 수락·완료확인)이 6절 대응표대로 움직이는 형태를 확인해 주세요.</p></div>
+  <div class="ask"><b class="no">요청 4</b><b>산출물을 받을 드라이브 폴더 합의.</b>
+    <p>완료 산출물이 저장될 드라이브 폴더 체계를 함께 정하시죠(회사 아카이브 제자리 원칙). 1순위 후보는 팀 위키의 팀_드롭박스 폴더입니다. 여기는 파일을 넣기만 하면 다음날 아침 자동 분류·색인이 이미 돌고 있어서, 이대로 쓰면 노션 쪽에 추가로 만들 것이 없습니다. 이 폴더로 통일할지, 사업별 아카이브 폴더 직접 저장을 병행할지만 정하면 됩니다.</p></div>
+  <div class="ask"><b class="no">요청 5</b><b>카톡 반자동 적재 방향 회신.</b>
+    <p>카톡의 [업무요청] 메시지를 보드에 반자동으로 싣는 단계(기존 카톡 수집 파이프라인과 노션 적재기 재사용 후보)를 진행할지, 어떤 방식이 좋을지 의견을 주세요. 선임 구현 방향을 확인한 뒤 결정하기로 보류해 둔 항목입니다.</p></div>
+</div>
+
+<h2>5. 이미 갖춰진 것 (재사용 자산)</h2>
+<div class="card">
+<table class="mini">
+  <tr><th>자산</th><th>위치</th><th>쓰임</th></tr>
+  <tr><td>업무요청 포맷 v1.2 정본</td><td>드라이브 07_기술자료·시스템/업무프로세스 (★업무요청포맷_최신.md)</td><td>카톡 카드 양식, 지시서 세트 표준, 노션 매핑표, 팀 공지문. 요지는 이 지시서 2·6절에 포함</td></tr>
+  <tr><td>field_map.json</td><td>대표 관리 저장소 노션/field_map.json</td><td>보드 속성명과 선택값의 정본. 전체 내용은 6절 표와 동일</td></tr>
+  <tr><td>노션 적재기(notion_agent.py)</td><td>대표 관리 저장소 노션/</td><td>노션 API 멱등 적재기. 반자동 적재(요청 5)의 재사용 후보</td></tr>
+  <tr><td>작업패킷 v2 브리프 구조</td><td>KB entries/2026-07-03_노션_자기완결_작업패킷</td><td>카드 본문 브리프의 구조(한눈 요약, 요청 상세, 자료함, 완료 기준)</td></tr>
+  <tr><td>아카이빙·위키 파이프라인</td><td>예약작업(매일 08:00 발행)</td><td>드라이브 자료를 색인·요약·전문검색으로 자동 편입</td></tr>
+  <tr><td>팀 위키</td><td>공유드라이브 버티 지식베이스/_회사자료_위키</td><td>팀원 검색면(색인, 다이제스트, 전문)</td></tr>
+  <tr><td>팀_드롭박스 폴더</td><td>_회사자료_위키/팀_드롭박스</td><td>팀 자료 인테이크. 다음날 아침 자동 분류·색인. 요청 4의 1순위 후보</td></tr>
+</table>
+</div>
+
+<h2>6. 노션 속성 매핑과 상태 흐름 (요약)</h2>
+<div class="card">
+<p>속성명과 선택값은 field_map.json 기준입니다. 카톡 필드 줄 앞 불렛(•)은 적재 시 제거합니다.</p>
+<table class="mini">
+  <tr><th>카톡 필드</th><th>노션 속성</th><th>비고</th></tr>
+  <tr><td>[업무요청] 머리표</td><td>(적재 시 제거)</td><td>카톡 검색·수집 식별용. 노션 제목에는 넣지 않는다</td></tr>
+  <tr><td>제목 줄</td><td>제목 (Title)</td><td>"할 일 + 상대" 꼴의 순수 업무 문구</td></tr>
+  <tr><td>담당</td><td>담당자 / 담당자(알림)</td><td>Select / People. 팀원 옵션 기등록</td></tr>
+  <tr><td>기한</td><td>마감일 (Date)</td><td></td></tr>
+  <tr><td>내용, 결과물</td><td>업무요청 / 해야할일</td><td>결과물 형식과 완료 기준 포함</td></tr>
+  <tr><td>참고 (지시서 PDF 링크)</td><td>링크 (URL)</td><td>파일은 카드에 직접 쌓지 않는다</td></tr>
+  <tr><td>보낸 사람</td><td>요청자 / 요청자(알림)</td><td></td></tr>
+  <tr><td>(긴급) 표기</td><td>우선순위</td><td>높음 / 보통 / 낮음</td></tr>
+  <tr><td>(자동)</td><td>소스=카카오·직접, 분류=업무 지시, 상태=신규, 수신일</td><td>적재 시 자동 부여</td></tr>
+  <tr><td>AI 컨텍스트 블록</td><td>카드 본문 (브리프)</td><td>작업패킷 v2 구조로 변환</td></tr>
+</table>
+<p style="margin-top:14px;">카톡 동작과 상태의 대응:</p>
+<table class="mini">
+  <tr><th>카톡 동작</th><th>노션 상태·속성</th></tr>
+  <tr><td>요청 발신 (담당 지정)</td><td>상태=배정됨</td></tr>
+  <tr><td>담당자 접수 답장</td><td>상태=진행중, 수락=수락</td></tr>
+  <tr><td>기한·범위 조정 요청</td><td>수락=재협상</td></tr>
+  <tr><td>완료 답장 (결과물 링크 첨부)</td><td>상태=완료, 완료확인=대기</td></tr>
+  <tr><td>요청자 확인 답장</td><td>완료확인=인정</td></tr>
+  <tr><td>중단·연기 합의</td><td>상태=보류</td></tr>
+</table>
+</div>
+
+<h2>7. 진행 단계와 기한, 완료 기준</h2>
+<div class="card">
+  <p><b>1차(방향 회신):</b> 8/12(수) 15시까지. 요청 1·4·5에 대한 답이면 됩니다. 형식은 자유롭게, 노션 페이지나 카톡 답장이면 충분합니다.</p>
+  <p><b>완성(왕복 시연):</b> 8/14(금) 15시까지. 업무요청 카드 한 건을 등록부터 완료 회신까지 실제로 돌려서 보드 링크를 공유해 주세요. 이 지시서 건을 그대로 테스트 카드로 쓰셔도 됩니다.</p>
+  <p>일정이 빠듯하면 접수 답장 때 협의해 주세요. 완료 보고는 카톡의 원 업무요청 메시지에 답장으로 부탁드립니다.</p>
+</div>
+<div class="checklist">
+  <h3>완료 기준 체크리스트</h3>
+  <ul>
+    <li>보드 속성이 field_map.json과 1:1이거나, 다른 항목이 회신으로 정리됐다</li>
+    <li>테스트 카드 1건이 등록부터 완료 회신까지 실제로 돌았고, 카드에 지시서 링크와 결과물 링크가 남았다</li>
+    <li>상태와 수락, 완료확인이 6절 대응표대로 움직였다</li>
+    <li>완료 산출물을 받을 드라이브 폴더가 합의됐다</li>
+    <li>반자동 적재(요청 5)에 대한 의견이 회신됐다</li>
+  </ul>
+</div>
+
+<h2>8. 참고 자료</h2>
+<div class="reflist">
+  <h3>출처와 링크</h3>
+  <ul>
+    <li>업무요청 포맷 v1.2 정본: 드라이브 07_기술자료·시스템/업무프로세스 (★업무요청포맷_최신.md, 대표 계정 관리). 카드 양식과 노션 매핑표 요지는 이 지시서 2절과 6절에 그대로 담겨 있습니다</li>
+    <li>회사자료 팀 위키 홈: <a href="https://drive.google.com/drive/folders/1pmKJLMW30h1grHHUA_b-UKhiDUtc3t71">버티 지식베이스/_회사자료_위키 (드라이브 폴더)</a></li>
+    <li>팀_드롭박스 폴더(산출물 인테이크 1순위 후보): <a href="https://drive.google.com/drive/folders/1vmWu0Z3bHZ33qBEMkitc_WG2cHQ4kRoW">_회사자료_위키/팀_드롭박스 (드라이브 폴더)</a></li>
+    <li>세트 표준 적용 전례: UWC2026 전시 제작 가이드 2종, 공고 자동수집 웹페이지 지시서 (2026-08-10)</li>
+  </ul>
+</div>
+
+<details class="aictx" open>
+<summary>AI 참고용 컨텍스트 (담당자의 AI 비서에게 이 문서를 주면 됩니다)</summary>
+<div class="prompt">[AI-CONTEXT v1 · 업무지시서 기계용 요약]
+역할: 이 문서는 ㈜버티(VERTY)의 업무지시서 정본이다. 너(AI)는 담당자(구창규 선임)의 작업을 돕는 비서로서 이 문서의 지시와 경계를 그대로 따른다. 문서에 없는 회사 사실을 추측하거나 생성하지 않는다.
+과업: 구현 중인 노션 업무요청 기능을 회사 업무 순환 모델에 맞물리게 확인·구현한다. 모델: 1) 카톡 카드+HTML 지시서로 요청 발신 2) 노션 보드에 카드 등록(속성 1:1, 지시서 PDF 링크='링크' 속성, AI 컨텍스트=본문 브리프) 3) 담당자가 결과 보고 HTML+산출물 파일로 회신(상태 갱신, 카톡 원 메시지 완료 답장) 4) 파일 정본은 드라이브 회사 아카이브 폴더에 저장, 노션엔 링크만 5) 드라이브 자료는 매일 08:00 기존 파이프라인이 팀 위키로 자동 환류(노션 쪽 구현 불필요).
+산출물: 1) 구현 방향 회신 1건(요청 1·4·5에 대한 답, 형식 자유) 2) 업무요청 카드 1건의 등록부터 완료 회신까지 왕복 시연(보드 링크 공유). / 기한: 방향 회신 2026-08-12(수) 15:00, 왕복 시연 2026-08-14(금) 15:00. 빠듯하면 접수 답장 때 협의. / 요청자: 김동우 대표.
+조건: 보드 속성은 회사 표준 필드맵(field_map.json)과 1:1(새 스키마 발명 금지). 전체 속성명·선택값은 본 지시서 6절 표에 포함. 구현 속성명이 다르면 어느 항목이 다른지 회신하고 매핑표 쪽을 교체한다. 카톡 포맷 v1.2와 지시서 구조는 불변.
+불변 제약: 노션 제목에 [업무요청] 접두 금지(2026-07-03 확정). 산출물 파일 정본은 노션 첨부가 아니라 드라이브 저장 후 노션 링크. 민감·개인 자료는 위키 환류 제외.
+보류 항목: 카톡 반자동 적재의 진행 여부와 방식(구창규 선임 방향 회신 후 김동우 대표와 결정), 완료 산출물을 받을 드라이브 폴더 체계(1순위 후보=공유드라이브 _회사자료_위키/팀_드롭박스, 자동 분류·색인 가동 중. 협의 확정).
+완료 처리: 회신과 시연 결과는 카톡의 원 업무요청 메시지에 답장으로 보고하고, 시연한 노션 보드 링크를 공유한다. 질문은 김동우 대표에게.
+관련 문서: 업무요청 포맷 v1.2(드라이브 ★업무요청포맷_최신.md, 요지는 본 지시서 2·6절), 회사 표준 필드맵(6절 표), 세트 전례=UWC2026 제작 가이드·공고수집 지시서(2026-08-10).</div>
+</details>
+
+<footer>㈜버티 업무지시서 v1.1 · 2026-08-10 · 작성: 김동우 · 문서 정본: 드라이브 07_기술자료·시스템/업무프로세스 (★노션업무요청_지시서_최신)</footer>
+
+</div>
+</body>
+</html>
