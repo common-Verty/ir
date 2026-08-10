@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>업무지시서 | 사업·R&D 공고 자동 수집 웹페이지 구축</title>
+<style>
+  :root {
+    --blue: #0078BE;
+    --ink: #1c2733;
+    --gray: #5a6672;
+    --line: #d9dee3;
+    --panel: #f4f6f8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.7;
+    font-size: 14px;
+  }
+  .page { max-width: 900px; margin: 0 auto; padding: 40px 36px 60px; }
+  .doc-label {
+    display: inline-block;
+    background: var(--blue);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 12px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  h1 { font-size: 24px; font-weight: 700; line-height: 1.4; margin-bottom: 20px; }
+  .meta {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 34px;
+    background: var(--panel);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .meta td { padding: 9px 16px; font-size: 13.5px; border-bottom: 1px solid #e8ecef; }
+  .meta td:first-child { width: 92px; color: var(--gray); font-weight: 600; white-space: nowrap; }
+  .meta tr:last-child td { border-bottom: none; }
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 38px 0 12px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--blue);
+  }
+  h3 { font-size: 14.5px; font-weight: 700; margin: 20px 0 8px; }
+  p { margin-bottom: 12px; }
+  table.list { width: 100%; border-collapse: collapse; margin: 12px 0 8px; font-size: 13px; }
+  table.list th {
+    background: var(--panel);
+    text-align: left;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  table.list td { padding: 8px 10px; border: 1px solid var(--line); vertical-align: top; }
+  table.list a { color: var(--blue); text-decoration: none; word-break: break-all; }
+  .star { color: var(--blue); font-weight: 700; }
+  .note {
+    background: var(--panel);
+    border-left: 3px solid var(--blue);
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 13.5px;
+    border-radius: 0 4px 4px 0;
+  }
+  ul.plain { margin: 6px 0 12px 20px; }
+  ul.plain li { margin-bottom: 6px; }
+  ol.plain { margin: 6px 0 12px 22px; }
+  ol.plain li { margin-bottom: 6px; }
+  .kw {
+    display: inline-block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 8px;
+    margin: 2px 3px 2px 0;
+    font-size: 12.5px;
+  }
+  .footer {
+    margin-top: 46px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--gray);
+  }
+  @media print {
+    body { font-size: 12px; }
+    .page { max-width: 100%; padding: 0; }
+    h2 { break-after: avoid; }
+    table.list { break-inside: auto; }
+    tr { break-inside: avoid; }
+    @page { size: A4; margin: 16mm 14mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <span class="doc-label">업무지시서</span>
+  <h1>사업·R&amp;D 공고 자동 수집 웹페이지 구축</h1>
+
+  <table class="meta">
+    <tr><td>담당</td><td>이태현 대리</td></tr>
+    <tr><td>요청자</td><td>김동우 대표</td></tr>
+    <tr><td>요청일</td><td>2026. 8. 10.(월)</td></tr>
+    <tr><td>기한</td><td>1차 시연 8/21(금) 18시, 완성 8/28(금) 18시 (조정 필요하면 접수 답장 때 협의)</td></tr>
+    <tr><td>결과물</td><td>공고 목록 웹페이지 1식(매일 자동 갱신, 키워드 필터, 신규 표시) + 팀 공유 접속 링크 + 운영 문서 1쪽</td></tr>
+  </table>
+
+  <h2>1. 배경과 목적</h2>
+  <p>
+    우리 회사가 챙겨야 하는 사업 공고와 R&amp;D 과제 공고는 NTIS, IRIS, KAIA, 나라장터 등
+    여러 사이트에 흩어져 올라옵니다. 지금은 사람이 사이트마다 직접 들어가 확인해야 하고, 그러다 보니
+    확인이 밀리거나 마감 임박에야 발견하는 일이 생깁니다. 공고는 놓치면 그 자체로 기회 손실입니다.
+  </p>
+  <p>
+    이 일을 자동화합니다. 아래에 정리한 수집 대상 사이트들을 매일 자동으로 긁어와, 우리 사업과 관련된
+    공고만 한 화면에서 볼 수 있는 웹페이지를 만들어 주세요. 완성되면 팀 전원이 매일 아침 링크 하나만
+    열어 그날의 신규 공고를 확인하는 것이 목표입니다.
+  </p>
+
+  <h2>2. 만들 것</h2>
+  <p>
+    회사 관련 키워드에 걸리는 공고를 모아 보여주는 웹페이지 하나입니다. 화면은 단순해도 됩니다.
+    핵심은 세 가지입니다.
+  </p>
+  <ol class="plain">
+    <li><b>매일 자동 수집.</b> 사람이 실행 버튼을 누르지 않아도 매일 아침 최신 상태가 되어 있어야 합니다.</li>
+    <li><b>새 공고가 바로 보일 것.</b> 전일 대비 신규 공고에 NEW 표시, 마감 임박(D-7 이내) 공고에 D-day 표시.</li>
+    <li><b>수집이 죽으면 죽었다고 보일 것.</b> 소스별 최근 수집 시각과 성공/실패 상태를 화면에 표시합니다.
+      조용히 멈춘 수집기는 없는 것보다 나쁩니다(오래된 정보를 최신으로 믿게 됩니다).</li>
+  </ol>
+
+  <h2>3. 수집 대상 사이트</h2>
+  <p>
+    현재까지 파악한 대상은 아래 14곳입니다. <span class="star">★</span>는 우리 사업과 직결되어
+    1차 시연에 반드시 포함할 곳입니다. URL은 2026. 8. 10. 기준으로 접속 확인을 마쳤습니다.
+  </p>
+
+  <h3>1군. 정부 R&amp;D 과제 공고</h3>
+  <table class="list">
+    <tr><th>기관·시스템</th><th>URL</th><th>수집할 것</th><th>비고</th></tr>
+    <tr>
+      <td><span class="star">★</span> IRIS 범부처통합연구지원시스템</td>
+      <td><a href="https://www.iris.go.kr">iris.go.kr</a></td>
+      <td>사업공고, 공모예고(사업일정)</td>
+      <td>국토부(KAIA) 등 다수 부처 과제 접수가 여기로 통합. 가장 중요</td>
+    </tr>
+    <tr>
+      <td>NTIS 국가과학기술지식정보서비스</td>
+      <td><a href="https://www.ntis.go.kr">ntis.go.kr</a></td>
+      <td>범부처 R&amp;D 사업공고 통합검색</td>
+      <td>IRIS 보완용 통합 포털. Open API 제공</td>
+    </tr>
+    <tr>
+      <td><span class="star">★</span> KAIA 국토교통과학기술진흥원</td>
+      <td><a href="https://www.kaia.re.kr">kaia.re.kr</a></td>
+      <td>사업공고 게시판</td>
+      <td>국토부 R&amp;D 소관기관(UAM, 드론, 스마트시티). 우리 주력 판</td>
+    </tr>
+    <tr>
+      <td><span class="star">★</span> KIAST 한국항공안전기술원</td>
+      <td><a href="https://www.kiast.or.kr">kiast.or.kr</a></td>
+      <td>입찰공고 게시판</td>
+      <td>K-UAM 그랜드챌린지, 드론 실증 사업의 운영기관. 수행 이력 있음</td>
+    </tr>
+    <tr>
+      <td>KEIT 한국산업기술기획평가원</td>
+      <td><a href="https://srome.keit.re.kr">srome.keit.re.kr</a></td>
+      <td>SROME 플랫폼의 사업공고</td>
+      <td>산업부 R&amp;D(AAM, 부품, 소재)</td>
+    </tr>
+    <tr>
+      <td>IITP 정보통신기획평가원</td>
+      <td><a href="https://ezone.iitp.kr">ezone.iitp.kr</a></td>
+      <td>ICT R&amp;D 공고</td>
+      <td>과기정통부(SW, AI, 디지털트윈)</td>
+    </tr>
+    <tr>
+      <td><span class="star">★</span> SMTECH 중소기업기술개발사업</td>
+      <td><a href="https://www.smtech.go.kr">smtech.go.kr</a></td>
+      <td>사업공고</td>
+      <td>중기부 기술개발. 스타트업이 실제로 가장 많이 쓰는 트랙</td>
+    </tr>
+    <tr>
+      <td>KRIT 국방기술진흥연구소</td>
+      <td><a href="https://krit.re.kr">krit.re.kr</a></td>
+      <td>과제 공고, 국방벤처·부품국산화</td>
+      <td>커버페이지에서 대표홈·과제관리시스템으로 진입하는 구조</td>
+    </tr>
+  </table>
+
+  <h3>2군. 조달·용역 입찰</h3>
+  <table class="list">
+    <tr><th>기관·시스템</th><th>URL</th><th>수집할 것</th><th>비고</th></tr>
+    <tr>
+      <td><span class="star">★</span> 나라장터 국가종합전자조달</td>
+      <td><a href="https://www.g2b.go.kr">g2b.go.kr</a></td>
+      <td>입찰공고 + 사전규격공개</td>
+      <td>키워드 검색 필수(전체는 하루 수천 건). 사전규격까지 봐야 발주를 미리 안다</td>
+    </tr>
+    <tr>
+      <td>국방전자조달시스템</td>
+      <td><a href="https://www.d2b.go.kr">d2b.go.kr</a></td>
+      <td>용역·물품 입찰공고</td>
+      <td>군 대상 사업(전시·관제·드론 대응)</td>
+    </tr>
+    <tr>
+      <td>한국공항공사</td>
+      <td><a href="https://www.airport.co.kr">airport.co.kr</a></td>
+      <td>열린경영 &gt; 입찰정보</td>
+      <td>KAC 자체 공고 게시판. 용역 수행 이력 있음</td>
+    </tr>
+    <tr>
+      <td>인천국제공항공사</td>
+      <td><a href="https://www.airport.kr">airport.kr</a></td>
+      <td>입찰공고 메뉴</td>
+      <td>게시판 정확한 경로는 구축하며 확정</td>
+    </tr>
+  </table>
+
+  <h3>3군. 지원사업 공고</h3>
+  <table class="list">
+    <tr><th>기관·시스템</th><th>URL</th><th>수집할 것</th><th>비고</th></tr>
+    <tr>
+      <td>기업마당</td>
+      <td><a href="https://www.bizinfo.go.kr">bizinfo.go.kr</a></td>
+      <td>지원사업 통합공고</td>
+      <td>전 부처 중소기업 지원사업이 모이는 곳. Open API 제공</td>
+    </tr>
+    <tr>
+      <td>K-Startup 창업지원포털</td>
+      <td><a href="https://www.k-startup.go.kr">k-startup.go.kr</a></td>
+      <td>사업공고</td>
+      <td>창업 지원사업</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    <b>2차 확장 후보(1차 범위 아님):</b> KIAT 한국산업기술진흥원(kiat.or.kr), 혁신장터(조달청 혁신제품),
+    경기도·서울시·인천시 등 지자체 고시공고, KARI 한국항공우주연구원 발주(대부분 나라장터에 병행 게재).
+    구조를 소스 추가가 쉬운 형태로 만들어 두면 나중에 여기부터 늘립니다.
+  </div>
+
+  <h2>4. 키워드 필터 (1차 세트)</h2>
+  <p>
+    아래 키워드 중 하나라도 공고명이나 요약에 걸리면 수집 대상입니다. 페이지에서 키워드를
+    추가·삭제할 수 있게 만들어 주세요(코드 수정 없이 목록 파일 수정 정도면 충분합니다).
+  </p>
+  <p>
+    <span class="kw">UAM</span><span class="kw">AAM</span><span class="kw">도심항공</span><span class="kw">미래항공</span><span class="kw">eVTOL</span><span class="kw">버티포트</span><span class="kw">드론</span><span class="kw">무인비행</span><span class="kw">무인기</span><span class="kw">대드론</span><span class="kw">불법드론</span><span class="kw">항공</span><span class="kw">공항</span><span class="kw">관제</span><span class="kw">항행</span><span class="kw">교통관리</span><span class="kw">디지털트윈</span><span class="kw">시뮬레이션</span><span class="kw">상황인식</span><span class="kw">식별</span><span class="kw">모빌리티</span><span class="kw">실증</span>
+  </p>
+  <p>
+    "항공", "실증"처럼 넓은 키워드는 잡음이 섞일 수 있습니다. 일단 넓게 잡고, 운영하며 좁히는
+    쪽이 놓치는 것보다 낫습니다. 나라장터처럼 건수가 많은 소스만 키워드를 좁게 시작해 주세요.
+  </p>
+
+  <h2>5. 화면 요구사항</h2>
+  <ul class="plain">
+    <li>목록 칼럼: 출처, 공고명(원문 링크), 공고일, 마감일, 예산(있으면), 상태(NEW / D-n)</li>
+    <li>정렬 기본값은 공고일 최신순, 마감일순 전환 가능</li>
+    <li>출처(1군·2군·3군, 기관별)와 키워드로 필터</li>
+    <li>상단에 수집 현황판: 소스별 최근 수집 시각과 성공/실패</li>
+    <li>휴대폰에서도 목록이 읽히는 반응형(팀원들이 이동 중에 봅니다)</li>
+    <li>공고 원문은 저장하지 말고 항상 원 사이트 링크로 연결(저작권·최신성 문제 회피)</li>
+  </ul>
+
+  <h2>6. 기술 가이드</h2>
+  <p>
+    구현 방식은 자율입니다. 다만 아래는 시행착오를 줄이는 힌트이니 참고해 주세요.
+  </p>
+  <ul class="plain">
+    <li><b>스크래핑보다 공식 API를 먼저 확인.</b> 공공데이터포털(data.go.kr)에서 "나라장터 입찰공고정보",
+      "기업마당 지원사업정보", "NTIS" 등을 검색하면 무료 Open API가 나옵니다. API가 있는 소스는
+      API로 받는 것이 차단 위험 없이 안정적입니다.</li>
+    <li><b>스크래핑하는 소스는 예의를 지킬 것.</b> 하루 1~2회, 게시판 목록 페이지만 가져옵니다.
+      로그인 뒤 영역이나 첨부파일 대량 수집은 하지 않습니다.</li>
+    <li><b>서버가 꼭 필요하지 않습니다.</b> 파이썬 수집 스크립트가 매일 정해진 시각에 돌고 결과를
+      정적 HTML이나 JSON으로 뱉어 GitHub Pages에 올리는 구조면 서버 비용 없이 됩니다.
+      회사 GitHub(common-Verty) Pages를 이미 쓰고 있으니 그 방식을 권합니다. 구글 시트 + Apps Script로
+      시작해도 됩니다.</li>
+    <li><b>수집 이력을 남길 것.</b> 공고 ID 기준으로 어제 목록과 비교해야 NEW 표시가 됩니다.
+      수집 실패도 기록해서 현황판에 올립니다.</li>
+    <li>일부 사이트(KRIT, 나라장터 등)는 자바스크립트로 렌더링되어 단순 요청으로는 빈 페이지가
+      옵니다. 이런 곳은 API 우선으로 찾고, 없으면 렌더링 도구(Playwright 등)를 쓰거나 모바일·구버전
+      페이지를 찾아보세요.</li>
+  </ul>
+
+  <h2>7. 진행 단계와 기한</h2>
+  <table class="list">
+    <tr><th>단계</th><th>범위</th><th>기한</th></tr>
+    <tr>
+      <td>1차 시연</td>
+      <td>★ 표시 5곳(IRIS, KAIA, KIAST, 나라장터, SMTECH) 수집 + 웹페이지 골격(목록, 키워드 필터, NEW 표시).
+        이 단계는 수동 실행이어도 됩니다</td>
+      <td>8/21(금) 18시</td>
+    </tr>
+    <tr>
+      <td>완성</td>
+      <td>14곳 전체 연결 + 매일 자동 수집 + 수집 현황판 + 팀 공유 링크 + 운영 문서 1쪽</td>
+      <td>8/28(금) 18시</td>
+    </tr>
+  </table>
+  <p>
+    기한이 빠듯하면 접수 답장 때 말해 주세요. 범위(소스 수)를 줄이는 쪽으로 조정하면 됩니다.
+    막히는 소스가 있으면 붙잡고 있지 말고 건너뛰고 사유만 남겨 주세요. 완성 단계에서 같이 봅니다.
+  </p>
+
+  <h2>8. 완료 기준</h2>
+  <ol class="plain">
+    <li>14개 소스가 연결되어 있다(수집 불가 소스는 사유가 현황판에 명시되어 있다)</li>
+    <li>매일 아침 9시 이전에 자동으로 갱신된다</li>
+    <li>키워드 필터, NEW 표시, 마감 D-day 표시가 동작한다</li>
+    <li>소스별 최근 수집 시각과 성공/실패가 화면에 보인다</li>
+    <li>팀원 누구나 링크로 접속되고 휴대폰에서도 읽힌다</li>
+    <li>운영 문서 1쪽이 있다(소스 추가 방법, 키워드 수정 방법, 수집이 멈췄을 때 확인 지점)</li>
+  </ol>
+
+  <h2>9. 참고 자료</h2>
+  <ul class="plain">
+    <li>수집 대상 URL 접속 확인: 2026. 8. 10. 웹 확인(KIAST 입찰공고 게시판, KAC 열린경영 &gt; 입찰정보,
+      KEIT SROME 공고 플랫폼, IRIS 사업공고·공모예고, IITP ezone, KRIT 커버페이지 구조 확인)</li>
+    <li>회사 사업 영역 근거: K-UAM 그랜드챌린지 실증, 국토부 K-UAM 안전운용체계 핵심기술개발 참여,
+      공항공사 용역 수행 이력, 군 대상 전시(UWC 2026) 준비 등 사내 이력 기준으로 소스를 선정</li>
+    <li>공공데이터포털: <a href="https://www.data.go.kr">data.go.kr</a> (Open API 검색)</li>
+  </ul>
+
+  <h2>10. AI-CONTEXT (담당자 AI 어시스턴트용 과업 정의)</h2>
+  <p style="font-size:13px; color:var(--gray); margin-bottom:8px;">
+    이 블록은 이태현 대리가 Claude 등 AI 어시스턴트에게 이 문서를 전달했을 때, AI가 과업을 바로
+    이해하고 돕게 하기 위한 요약입니다. 사람이 읽어도 됩니다.
+  </p>
+  <details open style="background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:14px 18px; font-size:13px;">
+    <summary style="font-weight:700; cursor:pointer; margin-bottom:8px;">AI-CONTEXT</summary>
+    <table class="list" style="margin-top:10px;">
+      <tr><td style="width:110px; font-weight:700;">역할</td><td>사업·R&amp;D 공고 자동 수집 웹페이지 구축 담당(이태현 대리)</td></tr>
+      <tr><td style="font-weight:700;">과업</td><td>본 지시서 §3의 14개 소스를 매일 자동 수집해 §4 키워드로 거르고 §5 요구사항대로 한 화면에 보여주는 웹페이지 구축</td></tr>
+      <tr><td style="font-weight:700;">산출물</td><td>공고 목록 웹페이지 1식(매일 자동 갱신, 키워드 필터, NEW·D-day 표시, 수집 현황판) + 팀 공유 접속 링크 + 운영 문서 1쪽</td></tr>
+      <tr><td style="font-weight:700;">기한</td><td>1차 시연 2026-08-21(금) 18시(★ 5곳), 완성 2026-08-28(금) 18시</td></tr>
+      <tr><td style="font-weight:700;">요청자</td><td>김동우 대표</td></tr>
+      <tr><td style="font-weight:700;">조건</td><td>공식 Open API 우선(공공데이터포털 data.go.kr), 스크래핑은 하루 1~2회 게시판 목록만, 기술 스택 자유(GitHub Pages 정적 구조 권장)</td></tr>
+      <tr><td style="font-weight:700;">불변 제약</td><td>공고 원문 저장 금지(항상 원 사이트 링크), 로그인 뒤 영역·첨부파일 대량 수집 금지, 수집 실패는 숨기지 말고 화면에 표시</td></tr>
+      <tr><td style="font-weight:700;">보류 항목</td><td>인천국제공항공사 게시판 정확 경로(구축하며 확정), 2차 확장 소스(KIAT·혁신장터·지자체 고시공고·KARI)</td></tr>
+      <tr><td style="font-weight:700;">완료 처리</td><td>§8 완료 기준 6항 자체 점검 후, 원 요청 카톡 메시지에 답장으로 접속 링크와 운영 문서를 제출</td></tr>
+      <tr><td style="font-weight:700;">관련 문서</td><td>이 지시서 PDF(드라이브 ★공고수집_업무지시서_최신.pdf, 링크 불변) · 공공데이터포털 data.go.kr</td></tr>
+    </table>
+  </details>
+
+  <div class="footer">
+    버티 | 업무지시서 v1.0 | 2026. 8. 10. | 문의는 김동우 대표에게 카톡으로
+  </div>
+
+</div>
+</body>
+</html>
