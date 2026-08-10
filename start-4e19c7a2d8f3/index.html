@@ -1,0 +1,207 @@
+<title>버티 자료 위키 — 팀원 시작 안내</title>
+<style>
+  :root{
+    --bg:#ffffff; --panel:#f3f6f9; --panel-2:#e9eef3; --line:#dbe3ea;
+    --ink:#16222e; --muted:#5c6b7a; --accent:#0078be; --accent-ink:#005a8f;
+    --ok:#2f9e6b; --warn:#c9781f; --warn-bg:#fcf3e6;
+    --radius:14px; --maxw:760px;
+    --mono:"Cascadia Code","Consolas",ui-monospace,monospace;
+    --sans:"Pretendard","Malgun Gothic","Segoe UI",-apple-system,system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0f1620; --panel:#18222e; --panel-2:#1f2b39; --line:#2a3947;
+      --ink:#e7eef4; --muted:#9aabba; --accent:#3aa0d8; --accent-ink:#8fcdec;
+      --ok:#4cc38a; --warn:#e0a45e; --warn-bg:#2a2417;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0f1620; --panel:#18222e; --panel-2:#1f2b39; --line:#2a3947;
+    --ink:#e7eef4; --muted:#9aabba; --accent:#3aa0d8; --accent-ink:#8fcdec;
+    --ok:#4cc38a; --warn:#e0a45e; --warn-bg:#2a2417;
+  }
+  :root[data-theme="light"]{
+    --bg:#ffffff; --panel:#f3f6f9; --panel-2:#e9eef3; --line:#dbe3ea;
+    --ink:#16222e; --muted:#5c6b7a; --accent:#0078be; --accent-ink:#005a8f;
+    --ok:#2f9e6b; --warn:#c9781f; --warn-bg:#fcf3e6;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--bg); color:var(--ink); font-family:var(--sans);
+    line-height:1.65; -webkit-font-smoothing:antialiased; margin:0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:44px 20px 80px;}
+  .eyebrow{font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); font-weight:700; margin:0 0 10px;}
+  h1{font-size:1.9rem; line-height:1.25; margin:0 0 12px; font-weight:800;
+    letter-spacing:-.01em; text-wrap:balance;}
+  .lede{font-size:1.06rem; color:var(--muted); margin:0 0 8px; max-width:62ch;}
+  h2{font-size:1.26rem; margin:42px 0 4px; font-weight:750; letter-spacing:-.01em;}
+  h2 .n{display:inline-flex; align-items:center; justify-content:center;
+    width:1.55em; height:1.55em; border-radius:8px; background:var(--accent);
+    color:#fff; font-size:.82rem; font-weight:800; margin-right:.5em; vertical-align:.12em;}
+  .sub{color:var(--muted); margin:0 0 16px; font-size:.97rem;}
+  .card{background:var(--panel); border:1px solid var(--line);
+    border-radius:var(--radius); padding:18px 20px; margin:12px 0;}
+  .card h3{margin:0 0 4px; font-size:1.04rem; font-weight:700;}
+  .card p{margin:.3em 0; color:var(--ink);}
+  .card .meta{color:var(--muted); font-size:.92rem;}
+  ul.clean{margin:.4em 0 .2em; padding-left:1.1em;}
+  ul.clean li{margin:.28em 0;}
+  code, .path{font-family:var(--mono); font-size:.9em; background:var(--panel-2);
+    border:1px solid var(--line); border-radius:6px; padding:.08em .4em; word-break:break-all;}
+  .btn{display:inline-block; font:inherit; font-weight:700; font-size:.98rem;
+    padding:.62em 1.25em; border-radius:10px; border:1px solid var(--accent);
+    background:var(--accent); color:#fff !important; text-decoration:none;
+    cursor:pointer; margin:8px 8px 2px 0;}
+  .btn.ghost{background:transparent; color:var(--accent-ink) !important;}
+  .btn:active{transform:translateY(1px)}
+  .q{display:block; background:var(--panel-2); border:1px solid var(--line);
+    border-radius:10px; padding:10px 14px; margin:8px 0; font-size:.97rem; cursor:pointer;}
+  .q::before{content:"“ "; color:var(--accent); font-weight:800;}
+  .q::after{content:" ”  ⧉"; color:var(--accent); font-weight:800; font-size:.86em;}
+  pre{font-family:var(--mono); font-size:.86rem; background:var(--panel-2);
+    border:1px solid var(--line); border-radius:10px; padding:12px 14px; overflow-x:auto; margin:10px 0;}
+  .callout{display:flex; gap:12px; align-items:flex-start; background:var(--warn-bg);
+    border:1px solid color-mix(in srgb, var(--warn) 40%, var(--line));
+    border-radius:12px; padding:14px 16px; margin:14px 0; font-size:.96rem;}
+  .callout .ic{color:var(--warn); font-weight:800; flex:0 0 auto;}
+  .tag{display:inline-block; font-size:.74rem; font-weight:700; letter-spacing:.04em;
+    padding:.15em .6em; border-radius:999px; background:var(--panel-2);
+    color:var(--muted); border:1px solid var(--line); margin-left:.5em; vertical-align:.15em;}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:2px 20px; margin:16px 0;}
+  details summary{cursor:pointer; font-weight:700; padding:16px 0; list-style:none;
+    display:flex; align-items:center; gap:10px;}
+  details summary::-webkit-details-marker{display:none}
+  details summary .chev{color:var(--accent); transition:transform .2s}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details .body{padding:0 0 18px; color:var(--ink);}
+  hr{border:none; border-top:1px solid var(--line); margin:40px 0;}
+  .footnote{color:var(--muted); font-size:.9rem; margin-top:8px;}
+  a{color:var(--accent-ink)}
+  #toast{position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(80px);
+    background:var(--ink); color:var(--bg); font-weight:700; font-size:.95rem;
+    padding:.6em 1.2em; border-radius:999px; opacity:0; transition:all .25s; pointer-events:none;}
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">버티 자료 위키 · 팀원 시작 안내 (v3)</p>
+  <h1>버튼만 누르면, Claude가 회사 자료를 대신 찾아줍니다</h1>
+  <p class="lede">회사 문서 5,800여 건(제안서·RFP·기술문서·발표자료·회의록)이 검색 가능한 형태로
+  매일 발행됩니다. 이 페이지의 버튼을 위에서부터 차례로 누르면 세팅이 끝납니다.</p>
+  <p class="sub">개발 지식은 필요 없습니다. 처음이라도 10분이면 됩니다.</p>
+
+  <h2><span class="n">1</span>구글 드라이브 연결 <span class="tag">한 번만</span></h2>
+  <div class="card">
+    <p>회사(verty.co.kr) 구글 계정으로 Google Drive for Desktop에 로그인하면
+    <span class="path">G:\공유 드라이브\버티 지식베이스</span> 가 자동으로 보입니다(별도 수락 없음).</p>
+    <a class="btn" href="https://www.google.com/drive/download/" target="_blank" rel="noopener">① Drive for Desktop 받기</a>
+    <a class="btn ghost" href="https://drive.google.com/drive/folders/1pmKJLMW30h1grHHUA_b-UKhiDUtc3t71" target="_blank" rel="noopener">② 위키 폴더가 열리는지 확인</a>
+    <p class="meta">②가 브라우저에서 열리면 권한은 이미 있는 것입니다. "액세스 요청" 화면이 나오면
+    회사 계정으로 로그인했는지 확인하고, 그래도 안 되면 김동우에게 알려주세요.</p>
+  </div>
+
+  <h2><span class="n">2</span>플러그인 설치 <span class="tag">쓰는 앱 하나만</span></h2>
+  <div class="card" style="border:2px solid var(--accent)">
+    <h3>Claude Code 쓰는 분 <span class="tag">복사 한 번 · 이후 자동 업데이트</span></h3>
+    <p class="meta">아래 버튼을 누르면 설치 문장이 복사됩니다. Claude Code 대화창에 붙여넣기만 하세요.
+    설치는 Claude가 대신 합니다.</p>
+    <button class="btn" id="copy-btn" type="button">설치 문장 복사</button>
+    <pre id="magic-prompt" style="white-space:pre-wrap">G:\공유 드라이브\버티 지식베이스\_회사자료_위키\도구_플러그인\Claude_설치지시서.md 를 읽고 그대로 실행해서 버티 팀 플러그인을 설치해줘. G: 드라이브가 없으면 다른 드라이브에서 '버티 지식베이스' 공유 드라이브를 찾아 진행해줘.</pre>
+    <p class="meta"><b>"설치 완료" 보고가 오면 그 창을 닫고 새 창을 여세요.</b> 끝입니다.
+    이후 새 버전은 자동으로 받아오므로 다시 설치할 일이 없습니다.</p>
+  </div>
+  <div class="card">
+    <h3>Cowork(데스크톱 앱) 쓰는 분 <span class="tag">파일 받아 설치 · 2분</span></h3>
+    <a class="btn" href="https://drive.google.com/uc?export=download&amp;id=1nnYiWMzJBkoVVPf7ENDMhaV04TtoKH_L">① 플러그인 파일 받기 (.plugin)</a>
+    <ul class="clean">
+      <li>② Cowork 왼쪽 사이드바 <b>Customize(커스터마이즈) → Plugins(플러그인)</b> 탭을 엽니다.</li>
+      <li>③ 받은 <span class="path">kdw-agent-skills.plugin</span> 파일을 추가(업로드 또는 드래그)하고 <b>설치</b>를 누릅니다.</li>
+    </ul>
+    <p class="meta">업데이트는 새 버전 공지가 오면 같은 버튼으로 다시 받아 설치하면 덮어써집니다.
+    Claude Code와 Cowork를 둘 다 쓰면 각각 한 번씩 설치합니다(내용물 동일).</p>
+  </div>
+
+  <h2><span class="n">3</span>바로 써보기 <span class="tag">누르면 복사됩니다</span></h2>
+  <p class="sub">질문을 누르면 복사됩니다. Claude 대화창에 붙여넣어 그대로 물어보세요.</p>
+  <span class="q">버티포트 관련 예전 제안서 찾아줘</span>
+  <span class="q">K-UAM 그랜드챌린지 진행현황 보고 최근 것 요약해줘</span>
+  <span class="q">UAM 시뮬레이션 용역 과업지시서(RFP) 찾아서 핵심 요건 정리해줘</span>
+  <span class="q">우리 회사 소개서 최신본 어디 있어?</span>
+  <span class="q">작년에 낸 발표자료 기반으로 새 발표 초안 잡아줘</span>
+  <p class="meta" style="color:var(--muted); font-size:.92rem">잘 안 찾으면 "회사 위키에서 찾아줘"라고
+  붙여 말하면 됩니다. 개인정보·급여·재무·법무·투자 자료는 검색에서 자동 제외돼 있습니다.</p>
+
+  <h2><span class="n">4</span>팀에 자료 올리기 <span class="tag">넣기만 하면 끝</span></h2>
+  <div class="card">
+    <p>공유할 파일을 <b>드롭박스 폴더에 넣기만 하면</b>, 다음 날 아침 자동으로 분류·요약·색인되어
+    누구나 검색할 수 있게 됩니다. 정리는 자동이므로 폴더를 만들거나 이름을 다듬을 필요가 없습니다.</p>
+    <a class="btn" href="https://drive.google.com/drive/folders/1vmWu0Z3bHZ33qBEMkitc_WG2cHQ4kRoW" target="_blank" rel="noopener">드롭박스 폴더 열기</a>
+    <ul class="clean">
+      <li>탐색기로는 <span class="path">G:\공유 드라이브\버티 지식베이스\_회사자료_위키\팀_드롭박스\</span> 에 끌어다 놓으면 됩니다. 폴더째 넣어도 됩니다.</li>
+      <li>다음 날 파일이 이 폴더에서 <b>사라지면 정상</b>입니다(아카이브로 이동·편입된 것).</li>
+      <li>개인 자료·민감 자료(급여·계약서 원본·개인정보)는 넣지 마세요.</li>
+    </ul>
+  </div>
+
+  <h2><span class="n">5</span>위키 직접 둘러보기 <span class="tag">선택</span></h2>
+  <div class="card">
+    <p class="meta">Claude에게 물어보는 것이 기본이지만, 직접 볼 수도 있습니다.
+    폴더 안 <span class="path">_팀_안내.md</span> 부터 읽으면 됩니다.
+    <span class="path">회사자료_인덱스.csv</span> 를 구글시트로 열면 전체 자료를 카테고리·키워드로 필터할 수 있습니다.</p>
+    <a class="btn ghost" href="https://drive.google.com/drive/folders/1pmKJLMW30h1grHHUA_b-UKhiDUtc3t71" target="_blank" rel="noopener">위키 폴더 열기</a>
+  </div>
+
+  <hr>
+
+  <details>
+    <summary><span class="chev">▸</span> 잘 안 될 때</summary>
+    <div class="body">
+      <ul class="clean">
+        <li><b>위키 폴더가 안 열려요("액세스 요청")</b> — 회사(verty.co.kr) 계정으로 로그인했는지 확인하세요.
+        개인 지메일로 열면 막힙니다. 계속 안 되면 김동우에게 알려주세요.</li>
+        <li><b>설치가 안 돼요</b> — 2번의 설치 문장을 그대로 다시 붙여넣어 보세요. 드라이브 문자가 G:가
+        아니어도 Claude가 알아서 찾고, 막히면 무엇이 필요한지 말해줍니다.</li>
+        <li><b>Claude가 회사 자료를 못 찾아요</b> — "회사 위키에서 찾아줘"라고 명시해 보고, 그래도 안 되면
+        G: 드라이브 연결과 플러그인 설치(새 창 열기)를 확인하세요.</li>
+        <li>해결이 안 되면 화면을 캡처해 김동우에게 보내주세요. 대부분 로그인 문제입니다.</li>
+      </ul>
+    </div>
+  </details>
+
+  <p class="footnote">문의: 김동우 (common@verty.co.kr) · 이 페이지는 항상 최신 상태로 유지됩니다 (v3 · 2026-08-10)</p>
+</div>
+<div id="toast">복사됐어요</div>
+<script>
+  (function(){
+    var toast = document.getElementById('toast'), timer = null;
+    function showToast(msg){
+      toast.textContent = msg; toast.classList.add('show');
+      clearTimeout(timer); timer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+    }
+    function copyText(t, okMsg){
+      function fail(){ showToast('복사 실패, 문장을 길게 눌러 직접 복사하세요'); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(t).then(function(){ showToast(okMsg); }, fail);
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch(e){}
+        document.body.removeChild(ta);
+        ok ? showToast(okMsg) : fail();
+      }
+    }
+    var b = document.getElementById('copy-btn');
+    if (b) b.addEventListener('click', function(){
+      copyText(document.getElementById('magic-prompt').textContent.trim(),
+               '복사됐어요, Claude Code에 붙여넣으세요');
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.q'), function(el){
+      el.setAttribute('title', '누르면 복사됩니다');
+      el.addEventListener('click', function(){ copyText(el.textContent.trim(), '질문이 복사됐어요'); });
+    });
+  })();
+</script>
