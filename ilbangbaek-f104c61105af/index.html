@@ -1,0 +1,296 @@
+<title>업무지시서 · 전사 일당백 운영체계 구축</title>
+<style>
+:root{
+  --vb:#0078BE; --vb-deep:#13518C; --vb-soft:#EAF2FA; --vb-line:#CBDEEF;
+  --panel:#F4F8FC; --page:#FFFFFF; --ink:#1A2734; --body:#4E606F; --muted:#8D98A1; --line:#D7E2EC;
+  --amber:#E08A00; --amber-soft:#FDF3E2; --ok:#2E7D5B; --ok-soft:#E9F4EF; --stop:#B3261E; --stop-soft:#FBEDEC;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --vb:#4FA8DC; --vb-deep:#8FC6E8; --vb-soft:#15293A; --vb-line:#2C4A63; --panel:#141F2A; --page:#0D151D;
+    --ink:#E9EFF5; --body:#AEBDCA; --muted:#7A8998; --line:#243545; --amber:#E5A63C; --amber-soft:#2B2213;
+    --ok:#6BBF95; --ok-soft:#15271F; --stop:#E97A72; --stop-soft:#2E1917; }
+}
+:root[data-theme="dark"]{ --vb:#4FA8DC; --vb-deep:#8FC6E8; --vb-soft:#15293A; --vb-line:#2C4A63; --panel:#141F2A; --page:#0D151D;
+  --ink:#E9EFF5; --body:#AEBDCA; --muted:#7A8998; --line:#243545; --amber:#E5A63C; --amber-soft:#2B2213;
+  --ok:#6BBF95; --ok-soft:#15271F; --stop:#E97A72; --stop-soft:#2E1917; }
+:root[data-theme="light"]{ --vb:#0078BE; --vb-deep:#13518C; --vb-soft:#EAF2FA; --vb-line:#CBDEEF; --panel:#F4F8FC; --page:#FFFFFF;
+  --ink:#1A2734; --body:#4E606F; --muted:#8D98A1; --line:#D7E2EC; --amber:#E08A00; --amber-soft:#FDF3E2;
+  --ok:#2E7D5B; --ok-soft:#E9F4EF; --stop:#B3261E; --stop-soft:#FBEDEC; }
+
+html{background:var(--page);}
+body{font-family:Pretendard,"Pretendard Variable","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  color:var(--body); background:var(--page); font-size:16px; line-height:1.8; letter-spacing:-.005em; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:1000px; margin:0 auto; padding:0 26px 88px;}
+h1,h2,h3{color:var(--ink); margin:0; text-wrap:balance; letter-spacing:-.02em;}
+p{margin:0;} strong{color:var(--ink); font-weight:600;}
+code{font-family:ui-monospace,"D2Coding",Consolas,"Malgun Gothic",monospace; font-size:.85em;
+  background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:.08em .4em; color:var(--ink);}
+a{color:var(--vb); text-decoration:none; border-bottom:1px solid var(--vb-line);}
+
+.top{border-bottom:2px solid var(--vb); padding:50px 0 22px; margin-bottom:16px;}
+.eyebrow{font-size:11px; font-weight:700; letter-spacing:.19em; color:var(--vb); text-transform:uppercase;}
+.top h1{font-size:clamp(25px,3.8vw,36px); font-weight:800; margin:14px 0 0; line-height:1.28;}
+.moves{background:var(--vb-soft); border-radius:10px; padding:13px 18px; margin:20px 0 34px; font-size:14.5px; color:var(--vb-deep);}
+.moves b{font-weight:700;}
+
+section{margin-top:46px;}
+.sh{display:flex; align-items:baseline; gap:13px; border-bottom:1px solid var(--line); padding-bottom:10px; margin-bottom:20px;}
+.sn{font-size:12px; font-weight:700; color:var(--vb); font-variant-numeric:tabular-nums; letter-spacing:.1em; flex:none;}
+.sh h2{font-size:21px; font-weight:700;}
+.prose{max-width:72ch; display:flex; flex-direction:column; gap:14px;}
+h3.sub{font-size:16.5px; font-weight:700; margin:26px 0 12px; color:var(--ink);}
+
+.tw{overflow-x:auto; border:1px solid var(--line); border-radius:11px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:560px;}
+th{background:var(--vb-soft); color:var(--vb-deep); font-weight:700; text-align:left; padding:10px 13px; border-bottom:1px solid var(--vb-line); font-size:12.5px; white-space:nowrap;}
+td{padding:10px 13px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.65;}
+tr:last-child td{border-bottom:none;} td b{color:var(--ink);}
+table.meta th{width:120px; background:var(--panel); color:var(--ink); border-right:1px solid var(--line);}
+table.meta{min-width:0;}
+
+ul.c,ol.c{margin:0; padding-left:19px; display:flex; flex-direction:column; gap:9px; font-size:15px;}
+ul.c li::marker,ol.c li::marker{color:var(--vb);}
+.note{border-left:3px solid var(--vb); background:var(--panel); border-radius:0 10px 10px 0; padding:15px 19px; font-size:14.5px;}
+.note.warn{border-left-color:var(--amber);} .note.stop{border-left-color:var(--stop);}
+.note b{display:block; color:var(--ink); margin-bottom:4px; font-size:13px;}
+.chip{display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:99px; white-space:nowrap;}
+.c-stop{background:var(--stop-soft); color:var(--stop);} .c-warn{background:var(--amber-soft); color:var(--amber);}
+.c-ok{background:var(--ok-soft); color:var(--ok);} .c-vb{background:var(--vb-soft); color:var(--vb-deep);}
+
+.ph{display:grid; grid-template-columns:130px 1fr; gap:18px; padding:18px 0; border-top:1px solid var(--line);}
+.ph:first-child{border-top:none;}
+.ph .w b{display:block; color:var(--vb-deep); font-size:13px; font-weight:700;}
+.ph .w span{color:var(--muted); font-size:12.5px; font-variant-numeric:tabular-nums;}
+.ph h4{font-size:15.5px; font-weight:700; margin-bottom:7px; color:var(--ink);}
+.ph ul{margin:0; padding-left:17px; font-size:14px; display:flex; flex-direction:column; gap:5px;}
+.ph .g{margin-top:9px; font-size:12.5px; background:var(--vb-soft); border-radius:8px; padding:8px 12px; color:var(--vb-deep);}
+
+.chk{display:flex; flex-direction:column; gap:10px;}
+.chk div{display:flex; gap:11px; align-items:flex-start; font-size:14.5px;}
+.chk .b{flex:none; width:16px; height:16px; border:2px solid var(--vb); border-radius:4px; margin-top:5px;}
+details{border:1px solid var(--line); border-radius:11px; padding:16px 20px; background:var(--panel); margin-top:40px;}
+details summary{font-weight:700; color:var(--ink); cursor:pointer; font-size:15px;}
+details pre{white-space:pre-wrap; font-family:ui-monospace,"D2Coding",Consolas,"Malgun Gothic",monospace;
+  font-size:12.5px; line-height:1.75; margin:14px 0 0; color:var(--body);}
+@media print{ .ph,.tw,.note,details{break-inside:avoid;} }
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Verty · 업무지시서</div>
+  <h1>전사 일당백 운영체계 구축</h1>
+</header>
+
+<div class="tw" style="margin-bottom:4px;"><table class="meta">
+  <tr><th>담당</th><td><b>구창규 선임연구원</b></td></tr>
+  <tr><th>요청자</th><td>김동우</td></tr>
+  <tr><th>요청일</th><td>2026-08-11 (화)</td></tr>
+  <tr><th>기한</th><td>착수 확인 8/13(목) · 1차 9/11(금) · 완성 11/27(금)</td></tr>
+  <tr><th>결과물</th><td>동작하는 운영체계 + 단계별 완료 보고 3건 (HTML 또는 PDF)</td></tr>
+</table></div>
+
+<p class="moves"><b>이 요청이 움직이는 것</b> · 운영. 직접적으로는 <b>V2 반복 매출 1호 계약</b>과 <b>V3 Pre-A 클로징</b>의 실무 처리량을 올린다. 관문 자체를 여는 일은 아니지만, 관문을 여는 사람들의 손이 부족한 상태를 푸는 일이다.</p>
+
+<section>
+  <div class="sh"><span class="sn">01</span><h2>배경과 목적</h2></div>
+  <div class="prose">
+    <p>버티에는 이미 상당한 AI 인프라가 있습니다. 스킬 36종을 담은 플러그인, 노션 업무 보드와 팀 일정, 회사 문서 1만 2천 건을 훑는 전문 검색, 메일 자동 초안, 무인 예약작업 열 건이 실제로 돌아갑니다. 그런데 이것을 쓰는 사람은 지금 한 명입니다.</p>
+    <p>원인을 파일과 로그로 확인해 보니 팀원의 의지 문제가 아니었습니다. <strong>시스템이 처음부터 한 사람용으로 지어져 있었습니다.</strong> 노션 업무요청 보드 136행은 만든 사람과 고친 사람이 전부 봇 계정이고, 그중 134행이 대표 한 사람의 메일함에서 왔습니다. 팀원이 일을 넣는 입구는 코드로만 있고 어떤 채널도 거기 연결돼 있지 않습니다. 회사 사실의 정본은 금지어 한 단어에 걸려 팀 위키에서 통째로 빠져 있었습니다(이 건은 8월 11일 수정 완료).</p>
+    <p>반대로 확인된 사실이 하나 더 있습니다. <strong>팀은 이미 스스로 자동화를 하고 있습니다.</strong> 담당자께서 만든 n8n 워크플로 세 개가 지금도 돌고 있고, 노션 업무 카드 38행 중 31행을 직접 만드셨습니다. 사람이 실제로 일하는 면은 이미 존재하는데, 그 면이 우리가 지은 시스템이 아닐 뿐입니다.</p>
+    <p>그래서 이 일은 새 시스템을 짓는 일이 아닙니다. <strong>이미 지어진 것을 팀원 손이 닿는 자리로 옮기고, 일이 지나가는 통로를 하나로 좁히는 일</strong>입니다. 설계와 실측 근거는 별도 설계서에 정리돼 있고, 이 문서는 그중 실행할 것만 뽑은 것입니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">02</span><h2>만들 것 네 가지</h2></div>
+  <ol class="c">
+    <li><strong>진입로.</strong> 직원이 설치 없이 첫 5분에 쓸모를 느끼는 시작 경로. 지금은 안내가 다섯 벌로 갈라져 있고 서로 다른 명령을 말합니다.</li>
+    <li><strong>접수 통로.</strong> 팀원이 카톡이나 메일로 한 줄 보내면 업무 카드가 만들어지는 경로. 지금은 팀원이 일을 넣을 입구가 없습니다.</li>
+    <li><strong>담당자 도달.</strong> 배정된 일이 그 사람 화면에 실제로 도착하게 하는 것. 지금은 미완료 21건 중 4건만 담당자가 연결돼 있습니다.</li>
+    <li><strong>직군별 도구 묶음.</strong> 전원에게 같은 36종을 주는 대신 직군별로 서너 개만 기본으로 주는 구성.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">03</span><h2>지금 상태 (실측)</h2></div>
+  <p class="prose" style="margin-bottom:16px;">2026년 8월 10일과 11일에 파일·로그·노션 실물로 확인한 값입니다. 착수 전에 다시 세어 보시고 다르면 알려주십시오.</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:30%">항목</th><th style="width:16%">현재</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td>Claude 좌석</td><td><b>확보됨</b></td><td>common 계정 기업 플랜 보유. 좌석 11석 또는 12석으로 파악되나 정확한 수와 배정 현황은 미확인. <b>첫 과업으로 확인 필요</b></td></tr>
+      <tr><td>플러그인 설치 인원</td><td><b>1명</b></td><td>스킬 36종 + 에이전트 4종, 현재 버전 1.31.0</td></tr>
+      <tr><td>업무 보드 사람 손길</td><td><b>0건</b></td><td>136행 전부 봇 생성·봇 수정. 134행이 대표 1인 Gmail 유입</td></tr>
+      <tr><td>담당자 알림 연결</td><td><b>21건 중 4건</b></td><td>나머지는 자료 대기 상태로 알림이 나가지 않음</td></tr>
+      <tr><td>팀원 직접 요청</td><td><b>2건</b></td><td>둘 다 대표가 명령줄로 넣은 것. 팀원이 넣은 것은 0건</td></tr>
+      <tr><td>팀 위키 발행</td><td><b>24건</b> <span class="chip c-ok">8/11 수정</span></td><td>금지어 한 단어로 파일을 통째 빼던 것을 줄 단위로 가리도록 변경. 12건에서 24건으로. 회사 핵심팩트와 MASTER 문서가 열림</td></tr>
+      <tr><td>무인 예약작업</td><td><b>10건 전부 정상</b> <span class="chip c-ok">8/11 정리</span></td><td>죽어 있던 3건 제거. 다만 전부 대표 PC 로그온에 묶여 있음</td></tr>
+      <tr><td>운영 경보 도달</td><td><b>연결됨</b> <span class="chip c-ok">8/11 신설</span></td><td>워치독 위험과 팀원 피드백 미확인이 대표 상황판으로 올라감</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">04</span><h2>요구사항과 가이드</h2></div>
+  <div class="note" style="margin-bottom:20px;">
+    <b>담당자 결정 범위</b>
+    방법·산출물 형식·도구 선택·자료 출처는 담당자 판단입니다. 비용 지출, 대외 발신, 직원 대상 전사 공지, 회사 자료의 공개 범위 변경만 대표 승인을 받으십시오.
+  </div>
+
+  <h3 class="sub">지켜야 할 순서</h3>
+  <p class="prose" style="margin-bottom:14px;">이 순서를 어기면 첫인상이 무너집니다. 실제로 이 순서 때문에 지금까지 확산이 멈춰 있었습니다.</p>
+  <ul class="c">
+    <li><strong>검색이 빨라진 다음에 안내를 배포합니다.</strong> 지금 공유 드라이브에서 파일 하나를 처음 읽는 데 7.4초가 걸립니다. 이대로 안내를 뿌리면 직원의 첫 시도가 멈춘 화면에서 끝납니다.</li>
+    <li><strong>정본이 팀에 보인 다음에 자료 회신 규칙을 켭니다.</strong> "파일 보내지 말고 검색 경로로 답하라"는 규칙은 검색해서 나와야 성립합니다.</li>
+    <li><strong>설치는 두 번째 주에 엽니다.</strong> 첫 주는 브라우저만으로 되는 것으로 가치를 먼저 보여주십시오.</li>
+  </ul>
+
+  <h3 class="sub">건드리면 안 되는 것</h3>
+  <ul class="c">
+    <li><strong>노션 데이터베이스를 합치지 마십시오.</strong> 합치면 데이터베이스 식별자가 바뀌어 지금 돌고 있는 n8n 워크플로가 조용히 멈춥니다. 통합이 필요하다고 판단되면 한쪽을 읽기 전용으로 병행 가동한 뒤 전환하고, 그 주에는 매일 건수를 대조하십시오.</li>
+    <li><strong>알림 게이트만 먼저 열지 마십시오.</strong> 노션 설정의 기본 담당자가 대표로 박혀 있어서, 게이트만 열면 알림이 전부 대표에게 갑니다. 기본값을 미배정으로 바꾸고 직군 배정 규칙을 넣은 다음에 여십시오.</li>
+    <li><strong>Cowork 사용자에게 훅으로 통제를 걸 수 없습니다.</strong> Cowork는 훅을 지원하지 않습니다. 비개발 직군의 정보 통제는 공유 드라이브 폴더 권한으로 하고, 훅은 Claude Code 사용자에게만 적용되는 보조 수단으로 두십시오.</li>
+    <li><strong>회사 자료를 공유 드라이브로 옮기는 일은 이번 범위가 아닙니다.</strong> 회사 아카이브 전체가 대표 개인 드라이브에 있어서 경로만 바꾸면 가리키는 실물이 없습니다. 이번에는 자료가 없는 환경에서 무엇을 쓰라는 안내를 도구에 넣는 것까지만 하고, 이전은 별도 과제로 올려 주십시오.</li>
+  </ul>
+
+  <h3 class="sub">시행착오를 줄이는 힌트</h3>
+  <ul class="c">
+    <li>스킬 본문이 실행하라고 지시하는 스크립트 열두 개 이상이 플러그인 번들에 없습니다. 팀원 PC에서는 그 지시가 전부 실패합니다. 스크립트 배포 경로를 한 곳으로 정하고 스킬 본문이 그 경로만 가리키게 하는 편이 낫습니다.</li>
+    <li>운영 수칙 열네 개가 담긴 디스패처 문서가 스킬 폴더 규약 밖에 있어 플러그인으로는 로드되지 않습니다. 팀원은 도구만 받고 언제 무엇을 쓰라는 규칙은 못 받습니다.</li>
+    <li>팀원용 검색면은 브라우저에서 열리는 위키 발행분으로 잡으십시오. 명령줄 검색은 파이썬 설치를 전제해서 비개발 직군에서 실패율이 가장 높습니다.</li>
+    <li>대용량 검색 데이터베이스를 매일 통째로 복제하지 마십시오. 원본이 600MB가 넘습니다. 이미 만들어져 있는 조각 단위 증분 경로를 쓰십시오.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">05</span><h2>진행 단계와 기한</h2></div>
+  <p class="prose" style="margin-bottom:14px;">8월 25일부터 27일까지 코엑스 UWC 전시가 있어 그 주는 비워 두었습니다. 일정이 빠듯하면 착수 답장 때 협의해 주십시오.</p>
+  <div>
+    <div class="ph">
+      <div class="w"><b>착수 확인</b><span>8/13(목)까지</span></div>
+      <div>
+        <h4>범위 확인과 좌석 파악</h4>
+        <ul>
+          <li>Claude 관리 콘솔에서 좌석 총수, 배정된 사람, 남은 좌석을 확인합니다.</li>
+          <li>미배정 좌석이 있으면 직원에게 초대를 보냅니다. 명부는 아래 참고 자료에 있습니다.</li>
+          <li>이 지시서에서 범위를 빼거나 더할 것이 있으면 이때 알려 주십시오.</li>
+        </ul>
+        <div class="g">완료 표시: 좌석 현황 한 줄과 초대 발송 결과를 카드에 회신</div>
+      </div>
+    </div>
+    <div class="ph">
+      <div class="w"><b>1차</b><span>9/11(금)</span></div>
+      <div>
+        <h4>진입로와 검색면</h4>
+        <ul>
+          <li>팀원 검색면을 브라우저 경로로 배선하고, 다른 사람 계정으로 직접 주행해 30초 안에 결과에 닿는지 확인합니다.</li>
+          <li>시작 안내를 설치 없는 쪽과 설치하는 쪽으로 나눠 하나만 정본으로 발행하고, 낡은 안내 다섯 벌을 정리합니다.</li>
+          <li>직군별로 검증된 질문 세 개씩을 만들어 붙입니다(영업·기획·재무·기술).</li>
+          <li>운영 수칙이 팀원 세션에서도 로드되게 배선합니다.</li>
+        </ul>
+        <div class="g">완료 표시: 12명 중 10명 이상이 안내의 항목 하나를 실행하고 결과를 남김</div>
+      </div>
+    </div>
+    <div class="ph">
+      <div class="w"><b>2차</b><span>10/23(금)</span></div>
+      <div>
+        <h4>접수 통로와 담당자 도달</h4>
+        <ul>
+          <li>팀원이 카톡이나 메일로 한 줄 보내면 카드가 만들어지는 경로를 엽니다. 기존 n8n 배선을 끊지 않는 방식으로 합니다.</li>
+          <li>기본 담당자를 미배정으로 바꾸고 직군 배정 규칙을 넣은 뒤 알림 게이트를 엽니다.</li>
+          <li>직군별 도구 묶음을 구성하고 배포합니다.</li>
+        </ul>
+        <div class="g">완료 표시: 미완료 카드의 담당자 연결률 100%, 팀원이 직접 넣은 카드가 나오기 시작함</div>
+      </div>
+    </div>
+    <div class="ph">
+      <div class="w"><b>완성</b><span>11/27(금)</span></div>
+      <div>
+        <h4>정착과 판정</h4>
+        <ul>
+          <li>네 주 연속으로 신규 업무 요청의 80퍼센트 이상이 카드로 들어오는지 확인합니다.</li>
+          <li>세 지표의 추이표와 존치 여부 판단 근거를 정리합니다.</li>
+          <li>이후 상시로 남는 유지보수 항목을 목록으로 만들고 각각에 담당을 붙입니다. 붙일 사람이 없는 항목은 빼십시오.</li>
+        </ul>
+        <div class="g">완료 표시: 아래 07절 세 지표 충족 여부와 판단 근거를 담은 보고 1건</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">06</span><h2>완료 기준</h2></div>
+  <div class="chk">
+    <div><div class="b"></div><div>좌석 현황이 파악되고 미배정 좌석이 배포됐다.</div></div>
+    <div><div class="b"></div><div>설치 없이 브라우저만으로 되는 시작 경로가 있고, 다른 사람 계정으로 주행해 30초 안에 결과에 닿는 것을 확인했다.</div></div>
+    <div><div class="b"></div><div>시작 안내가 하나로 정리됐고, 낡은 안내는 폐기 표시와 정본 링크만 남겼다.</div></div>
+    <div><div class="b"></div><div>팀원이 카톡이나 메일 한 줄로 업무 카드를 만들 수 있고, 그 카드가 담당자 화면에 알림으로 도착한다.</div></div>
+    <div><div class="b"></div><div>기존 n8n 워크플로 세 개가 작업 전후로 동일하게 동작한다(건수 대조 기록 첨부).</div></div>
+    <div><div class="b"></div><div>직군별 도구 묶음이 배포됐고, 직원이 자기 목록에서 쓸 것을 찾을 수 있다.</div></div>
+    <div><div class="b"></div><div><strong>조용한 실패가 없다.</strong> 자동으로 도는 것은 실패했을 때 사람이 보는 화면에 표시되고, 처리할 수 없는 경우 그 사유가 남는다.</div></div>
+    <div><div class="b"></div><div>세 지표(주간 활성 인원, 카드 접수 비율, 관문 제출물)의 측정값과 판단 근거가 보고됐다.</div></div>
+  </div>
+  <div class="note stop" style="margin-top:22px;">
+    <b>이번에 하지 않는 것</b>
+    회사 자료를 개인 드라이브에서 공유 드라이브로 옮기는 일 · 노션 데이터베이스 통합 · 12명 메일함 수집(도메인 위임 계정이 필요해 별도 과제) · AI 사용량을 인사평가에 반영하는 것.
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">07</span><h2>무엇으로 성공을 판정하나</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">지표</th><th style="width:14%">현재</th><th style="width:14%">11월 말</th><th>재는 방법</th></tr></thead>
+    <tbody>
+      <tr><td><b>주간 활성 인원</b></td><td>1명</td><td>8명 이상</td><td>그 주에 회사 계정으로 실제 산출물을 만든 사람 수. 로그인 횟수나 좌석 수는 쓰지 않습니다</td></tr>
+      <tr><td><b>카드 접수 비율</b></td><td>1.5%</td><td>80% 이상<br>4주 연속</td><td>신규 업무 요청 중 사람이 직접 넣은 것의 비중</td></tr>
+      <tr><td><b>관문 제출물</b></td><td>미측정</td><td>1건 이상</td><td>V1부터 V4까지 각 관문에 실제로 제출되거나 상대에게 전달된 산출물 수</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note warn" style="margin-top:18px;">
+    <b>자기보고는 근거로 쓰지 않습니다</b>
+    한 실험에서 숙련 개발자들이 AI를 쓸 때 실제로는 19퍼센트 느려졌는데 본인들은 20퍼센트 빨라졌다고 답했습니다. 시간 단축을 주장하려면 착수 전에 스톱워치로 기준선을 남겨 두십시오.
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">08</span><h2>검수와 회신</h2></div>
+  <div class="prose">
+    <p>결과는 HTML 또는 PDF로 회신하고, 원본은 드라이브 정본 위치에 저장합니다. 참조한 자료의 출처 목록을 함께 붙이고, 금액이 들어가면 원화 억원으로 적습니다.</p>
+    <p>회신 절차는 결과와 산출물을 노션 카드에 첨부하고 상태를 완료로 바꾸는 것입니다. 받은 요청은 하루 안에 수락 또는 재협상을 표시해 주십시오.</p>
+    <p>막히는 것이 있으면 공유 드라이브 <code>_전달_피드백</code> 폴더에 파일로 올려 주십시오. 이제 그 폴더의 미확인 항목은 자동으로 대표 상황판에 올라가고, 사흘이 지나면 우선순위가 올라갑니다. 7월에 보내신 두 건이 14일 걸린 것은 이 경로가 없어서였고, 8월 11일에 고쳤습니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="sn">09</span><h2>참고 자료</h2></div>
+  <div class="prose">
+    <p><strong>설계 근거.</strong> 이 지시서는 「버티 일당백 운영체계 설계서 v1.0」(2026-08-11)에서 실행 부분만 뽑은 것입니다. 현행 5축 실측 감사 81건, 외부 조사 91건, 적대 검증 28건이 그 문서에 정리돼 있습니다. 전문이 필요하시면 요청해 주십시오.</p>
+    <p><strong>직원 명부.</strong> 김동우, 김현중, 배경원, 정덕우, 송종문, 서광훈, 민경찬, 구창규, 이태현, 김동윤. 회사 이메일은 각자 이니셜에 <code>@verty.co.kr</code>입니다.</p>
+    <p><strong>이미 손댄 것(8월 10~11일).</strong> 팀 위키 발행 규칙 수정으로 발행이 12건에서 24건으로 늘었고 회사 핵심팩트와 MASTER 문서가 열렸습니다. 죽어 있던 예약작업 세 건을 정리해 열 건 전부 정상입니다. 워치독 경보와 피드백 대장이 대표 상황판으로 올라가게 배선했습니다. 플러그인에 버전 표시를 넣어 하루 첫 대화에서 현재 버전이 한 줄 뜹니다(v1.31.0).</p>
+    <p><strong>외부 근거.</strong> MIT NANDA 「The GenAI Divide」(2025), BCG 「AI at Work」(2025), Slack Workforce Index(2025), METR 무작위 대조 실험(2025), 한국은행 이슈노트 제2025-22호. 조직 도입에서 성공을 가르는 것은 도구가 아니라 학습과 통합이라는 것이 공통된 결론이었고, 외부 도구를 쓴 쪽이 자체 개발한 쪽보다 배포 성공률이 두 배였습니다.</p>
+  </div>
+</section>
+
+<details open>
+  <summary>AI-CONTEXT (담당자 Claude에 이 문서만 넘겨도 되도록)</summary>
+  <pre>역할: 버티 전사 일당백 운영체계 구축 담당
+과업: 이미 구축된 AI 인프라(스킬 플러그인 36종·노션 업무보드·드라이브 위키 전문검색·메일 자동초안·무인 예약작업 10건)를 1인용에서 12인용으로 전환한다. 새 시스템을 짓지 않고 기존 자산을 팀원 손이 닿는 자리로 옮긴다.
+산출물: ①설치 없이 되는 시작 경로 ②팀원 요청 접수 통로 ③담당자 알림 도달 ④직군별 도구 묶음 + 단계별 완료 보고 3건(HTML 또는 PDF)
+기한: 착수 확인 2026-08-13(목) / 1차 2026-09-11(금) / 완성 2026-11-27(금). 2026-08-25~27은 코엑스 UWC 전시로 작업 없음
+요청자: 김동우
+조건: 방법·산출물 형식·도구 선택·자료 출처는 담당자 판단. 비용 지출·대외 발신·전사 공지·회사 자료 공개범위 변경만 대표 승인
+불변 제약:
+  - 노션 데이터베이스를 합치지 않는다(database id가 바뀌면 담당자 본인의 n8n 워크플로 3개가 조용히 멈춘다)
+  - 알림 게이트를 열기 전에 기본 담당자를 미배정으로 바꾸고 직군 배정 규칙을 먼저 넣는다(현재 기본값이 김동우로 고정돼 알림이 전부 대표에게 간다)
+  - Cowork는 훅을 지원하지 않는다. 비개발 직군 통제는 공유드라이브 폴더 권한으로 한다
+  - 검색면 개선을 안내 배포보다 먼저 끝낸다(드라이브 콜드 리드 7.4초 — 첫 시도가 멈춘 화면에서 끝난다)
+  - 정본이 팀 위키에 보인 뒤에 자료 회신 규칙을 켠다
+  - 팀원에게 나가는 링크에 대표 개인 드라이브(내 드라이브) file/d/ 링크를 넣지 않는다(권한 요청이 뜨면 그 시점에 실패)
+  - 대용량 검색 DB(600MB+)를 매일 통째 복제하지 않는다. 기존 샤드 증분 경로를 쓴다
+  - 팀원 검색면에 파이썬 설치를 전제하지 않는다
+보류 항목: 회사 자료의 개인드라이브 → 공유드라이브 이전 / 노션 DB 통합 / 12명 메일함 수집(도메인 위임 계정 필요) / AI 사용량의 인사평가 반영
+완료 처리: 결과·산출물을 노션 카드에 첨부하고 상태를 완료로 변경. 받은 요청은 하루 안에 수락 또는 재협상 표시. 결과는 HTML 또는 PDF, 출처 목록 첨부, 금액은 원화 억원
+관련 문서: 이 지시서(웹) · 노션 업무요청 보드 카드 · 공유드라이브 _전달_피드백 폴더(막힘 신고, 미확인 항목은 자동으로 대표 상황판에 올라감)</pre>
+</details>
+
+</div>
